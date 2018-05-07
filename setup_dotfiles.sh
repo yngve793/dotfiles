@@ -27,5 +27,5 @@ echo "Set appendname to ${appendname}"
 for dotconfdir in "${dotconfdirs[@]}";do
 		echo "Creating symlink for .config/${dotconfdir}"
 		rm -rf "${HOME}/.config/${dotconfdir}"
-		ln -sf "${dir}/${dotconfdir}${appendname}" "${HOME}/.config/${dotconfdir}"		
+		ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
 done
