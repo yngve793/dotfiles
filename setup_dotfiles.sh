@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 dotfiles=(".gitignore_global" ".gitconfig")
 dir="${HOME}/dotfiles"
