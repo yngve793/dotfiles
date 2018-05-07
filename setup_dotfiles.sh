@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig")
+dotfiles=(".gitignore_global" ".gitconfig" ".config")
 dir="${HOME}/dotfiles"
 
 echo "Set dir to ${dir}"
