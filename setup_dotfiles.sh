@@ -13,8 +13,18 @@ for dotfile in "${dotfiles[@]}";do
 done
 
 dotconfdirs=("i3")
+
+appendname=""
+if [ "$HOSTNAME" = "CRD-L-05716" ]; then
+    appendname="_linuxSubSystem"
+else
+    appendname=""
+fi
+
+echo "Set appendname to ${appendname}"
+
 for dotconfdir in "${dotconfdirs[@]}";do
 		echo "Creating symlink for .config/${dotconfdir}"
 		rm -rf "${HOME}/.config/${dotconfdir}"
-		ln -sf "${dir}/${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
+		ln -sf "${dir}/${dotconfdir}${appendname}" "${HOME}/.config/${dotconfdir}"		
 done
