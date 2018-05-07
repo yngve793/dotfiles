@@ -1,0 +1,10 @@
+[user]
+	editor = emacs
+	name = Alexander Jaust
+	email = alexander.jaust@uhasselt.be
+[push]
+	default = simple
+[core]
+	excludesfile = /home/alex/.gitignore_global
+[diff]
+	tool = meld
