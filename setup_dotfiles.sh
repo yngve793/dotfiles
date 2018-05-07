@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig")
+dotfiles=(".gitignore_global" ".gitconfig" ".emacs")
 dir="${HOME}/dotfiles"
 
 echo "Set dir to ${dir}"
@@ -15,11 +15,12 @@ done
 dotconfdirs=("i3")
 
 appendname=""
-if [ "$HOSTNAME" = "CRD-L-05716" ]; then
-    appendname="_linuxSubSystem"
-else
-    appendname=""
-fi
+
+case $HOSTNAME in
+  (CRD-L-05716) appendname="linuxSubsystem/";;
+  (*) appendname="";;
+esac
+
 
 echo "Set appendname to ${appendname}"
 
