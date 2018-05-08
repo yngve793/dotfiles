@@ -23,13 +23,15 @@ deploy_configs () {
   done
 }
 
+# Deployment of configurations residing in .config/
 
-# System independent 
-dotconfdirs=("dunst")
+# System-independent 
+dotconfdirsSystemIndependent=("dunst")
+# Deploy
+deploy_configs "" "${dotconfdirsSystemIndependent}"
 
-deploy_configs "" "${dotconfdirs}"
-
-dotconfdirs=("i3")
+# System-dependent
+dotconfdirsSystemDependent=("i3")
 
 appendname=""
 
@@ -39,10 +41,6 @@ case $HOSTNAME in
 esac
 echo "Set appendname to ${appendname}"
 
-deploy_configs "${appendname}" "${dotconfdirs}"
+deploy_configs "${appendname}" "${dotconfdirsSystemDependent}"
 
-#for dotconfdir in "${dotconfdirs[@]}";do
-#		echo "Creating symlink for .config/${dotconfdir}"
-#		rm -rf "${HOME}/.config/${dotconfdir}"
-#		ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
-#done
+
