@@ -64,6 +64,9 @@ alias ssh_leuven2_noX="ssh -C vsc31571@login2.hpc.kuleuven.be"
 alias ssh_VSCleuven="ssh -YC u0120326@login.hpc.kuleuven.be"
 alias ssh_VSCleuvenXuser="ssh -YC x0120326@login.hpc.kuleuven.be"
 
+alias ssh_VSCleuven2="ssh -YC u0120326@login2.hpc.kuleuven.be"
+alias ssh_VSCleuven2Xuser="ssh -YC x0120326@login2.hpc.kuleuven.be"
+
 alias tier1='ssh -YC x0120326@login1-tier1.hpc.kuleuven.be'
 alias tier1a='ssh -YC x0120326@login2-tier1.hpc.kuleuven.be'
 
