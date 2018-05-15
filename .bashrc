@@ -62,23 +62,25 @@ TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
 
 BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
 
+MY_SSH_OPTIONS=-AYC
+
 alias asdf="echo 'asdf'"
 
 alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
 #alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
 
-alias ssh_leuven1="ssh -YC ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_leuven2="ssh -YC ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
+alias ssh_leuven1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_leuven2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_VSCleuven1="ssh -YC ${U_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_VSCleuven2="ssh -YC ${U_USERID}@${TIER2_LOGIN_NODE2}"
+alias ssh_VSCleuven1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_VSCleuven2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_XUserleuven1="ssh -YC ${X_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_XUserleuven2="ssh -YC ${X_USERID}@${TIER2_LOGIN_NODE2}"
+alias ssh_XUserleuven1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_XUserleuven2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias tier1_login="ssh -YC ${X_USERID}@${TIER1_LOGIN_NODE1}"
-alias tier1_login2="ssh -YC ${X_USERID}@${TIER1_LOGIN_NODE2}"
+alias tier1_login="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
+alias tier1_login2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
 
-alias sshBatch="ssh -YC ${X_USERID}@${BATCH_LOGIN_NODE}"
+alias sshBatch="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 alias rm="rm -i"
