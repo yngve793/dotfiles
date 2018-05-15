@@ -50,26 +50,35 @@ export CODIPACKDIR=/opt/CoDiPack
 
 #archey3
 
+VSC_USERID=vsc31571
+U_USERID=u0120326
+X_USERID=x0120326
+
+TIER2_LOGIN_NODE1=login.hpc.kuleuven.be
+TIER2_LOGIN_NODE2=login2.hpc.kuleuven.be
+
+TIER1_LOGIN_NODE1=login1-tier1.hpc.kuleuven.be
+TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
+
+BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
+
 alias asdf="echo 'asdf'"
 
 alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
 #alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
 
-alias ssh_leuven="ssh -YC vsc31571@login.hpc.kuleuven.be"
-alias ssh_leuven2="ssh -YC vsc31571@login2.hpc.kuleuven.be"
+alias ssh_leuven1="ssh -YC ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_leuven2="ssh -YC ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_leuven_noX="ssh -C vsc31571@login.hpc.kuleuven.be"
-alias ssh_leuven2_noX="ssh -C vsc31571@login2.hpc.kuleuven.be"
+alias ssh_VSCleuven1="ssh -YC ${U_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_VSCleuven2="ssh -YC ${U_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_VSCleuven="ssh -YC u0120326@login.hpc.kuleuven.be"
-alias ssh_VSCleuvenXuser="ssh -YC x0120326@login.hpc.kuleuven.be"
+alias ssh_XUserleuven1="ssh -YC ${X_USERID}@${TIER2_LOGIN_NODE1}"
+alias ssh_XUserleuven2="ssh -YC ${X_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_VSCleuven2="ssh -YC u0120326@login2.hpc.kuleuven.be"
-alias ssh_VSCleuven2Xuser="ssh -YC x0120326@login2.hpc.kuleuven.be"
+alias tier1_login="ssh -YC ${X_USERID}@${TIER1_LOGIN_NODE1}"
+alias tier1_login2="ssh -YC ${X_USERID}@${TIER1_LOGIN_NODE2}"
 
-alias tier1='ssh -YC x0120326@login1-tier1.hpc.kuleuven.be'
-alias tier1a='ssh -YC x0120326@login2-tier1.hpc.kuleuven.be'
-
-alias sshBatch='ssh -YC x0120326@tier2-p-batch-1.icts.hpc.kuleuven.be'
+alias sshBatch="ssh -YC ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 alias rm="rm -i"
