@@ -60,6 +60,9 @@ TIER2_LOGIN_NODE2=login2.hpc.kuleuven.be
 TIER1_LOGIN_NODE1=login1-tier1.hpc.kuleuven.be
 TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
 
+GENIUS_LOGIN_NODE3=login3-tier2.hpc.kuleuven.be
+GENIUS_LOGIN_NODE4=login4-tier2.hpc.kuleuven.be
+
 BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
 
 MY_SSH_OPTIONS=-AYC
@@ -81,6 +84,15 @@ alias ssh_XUserleuven2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
 alias tier1_login="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
 alias tier1_login2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
 
+alias genius_login3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
+alias genius_login4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
+
 alias sshBatch="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 alias rm="rm -i"
+
+# Enable X-forwarding on windows subsystem
+case $HOSTNAME in
+  (CRD-L-05716) export DISPLAY=127.0.0.1:0;;
+  (*) ;;
+esac
