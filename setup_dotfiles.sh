@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc")
+dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc")
 dir="${HOME}/dotfiles"
 
 echo "Set dir to ${dir}"
