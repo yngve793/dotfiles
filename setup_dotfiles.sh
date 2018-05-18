@@ -3,6 +3,14 @@
 dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc")
 dir="${HOME}/dotfiles"
 
+# Check if there is an update in my repository
+if git pull ; then
+	#Deployed my normal dotfiles
+	echo "Looking for updates in my repository"
+else
+	exit $?
+fi
+
 echo "Set dir to ${dir}"
 
 for dotfile in "${dotfiles[@]}";do
