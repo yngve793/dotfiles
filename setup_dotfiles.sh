@@ -18,6 +18,12 @@ for dotfile in "${dotfiles[@]}";do
 #  echo  "${HOME}/${dotfile}"
 #  echo "${dir}/${dotfile}"
 		ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
+
+		case ${dotfile} in
+		  (.vimrc)	mkdir -p "${HOME}/.vim"
+				ln -sf "${dir}/vim/colors/" "${HOME}/.vim/colors";;
+		  (*) ;;
+		esac
 done
 
 deploy_configs () {

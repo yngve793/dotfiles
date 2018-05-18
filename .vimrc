@@ -37,7 +37,7 @@ au BufWinLeave ?* mkview
 au BufWinEnter ?* silent loadview
 
 " set color scheme
-:colorscheme desert
+:colorscheme wombat
 
 " make sure some lines above or below current line are visible at all times
 :set scrolloff=5
