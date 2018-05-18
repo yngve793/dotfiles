@@ -20,8 +20,8 @@ for dotfile in "${dotfiles[@]}";do
 		ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
 
 		case ${dotfile} in
-		  (.vimrc)	mkdir -p "${HOME}/.vim"
-				ln -sf "${dir}/vim/colors/" "${HOME}/.vim/colors";;
+		  (.vimrc)	rm -rf "${HOME}/.vim"
+				ln -sf "${dir}/vim" "${HOME}/.vim";;
 		  (*) ;;
 		esac
 done
