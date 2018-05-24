@@ -107,8 +107,8 @@ bindsym $mod+o scratchpad show
 #bindsym $mod+d focus child
 
 # Name the workspaces
-set $tag1 "1:www"
-set $tag2 "2:mail"
+set $tag1 "1:cluster"
+set $tag2 "2:local"
 set $tag3 "3:code"
 
 # switch to workspace
