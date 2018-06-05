@@ -2,6 +2,12 @@
 # ~/.bashrc
 #
 
+# Source standard bashrc
+case $HOSTNAME in
+  (CRD-L-05716) source /etc/bash.bashrc;;
+  (*) ;;
+esac
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -28,7 +34,7 @@ PS1='[\u@\h \W]\$ '
 
 export OMP_NUM_THREADS=1
 
-export EDITOR=emacs
+export EDITOR=vim
 
 #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
 export DISTCC_HOSTS="deepthought/5,lzo,cpp"
@@ -53,6 +59,8 @@ TIER2_LOGIN_NODE2=login2.hpc.kuleuven.be
 TIER1_LOGIN_NODE1=login1-tier1.hpc.kuleuven.be
 TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
 
+GENIUS_LOGIN_NODE1=login1-tier2.hpc.kuleuven.be
+GENIUS_LOGIN_NODE2=login2-tier2.hpc.kuleuven.be
 GENIUS_LOGIN_NODE3=login3-tier2.hpc.kuleuven.be
 GENIUS_LOGIN_NODE4=login4-tier2.hpc.kuleuven.be
 
@@ -65,27 +73,31 @@ alias asdf="echo 'asdf'"
 alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
 #alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
 
-alias ssh_leuven1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_leuven2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinking_VSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinking_VSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_VSCleuven1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_VSCleuven2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinking_UuserLogin1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinking_UuserLogin2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias ssh_XUserleuven1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
-alias ssh_XUserleuven2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinking_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinking_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias tier1_login="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
-alias tier1_login2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
+alias breniac_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
+alias breniac_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
 
-alias genius_login3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
-alias genius_login4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
+alias genius_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE1}"
+alias genius_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}"
+alias genius_XuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
+alias genius_XuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
 
-alias sshBatch="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
+alias batch_XuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 alias rm="rm -i"
 
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
-  (CRD-L-05716) export DISPLAY=127.0.0.1:0;;
+  (CRD-L-05716) export DISPLAY=127.0.0.1:0
+  export TERM=rxvt-unicode-256color
+  ;;
   (*) ;;
 esac
