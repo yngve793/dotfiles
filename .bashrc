@@ -68,8 +68,6 @@ BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
 
 MY_SSH_OPTIONS=-AYC
 
-alias asdf="echo 'asdf'"
-
 alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
 #alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
 
@@ -97,7 +95,7 @@ alias rm="rm -i"
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
   (CRD-L-05716) export DISPLAY=127.0.0.1:0
-  export TERM=rxvt-unicode-256color
+  #export TERM=rxvt-unicode-256color
   ;;
   (*) ;;
 esac
