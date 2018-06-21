@@ -1,5 +1,5 @@
 [user]
-	editor = emacs
+	editor = vim
 	name = Alexander Jaust
 	email = alexander.jaust@uhasselt.be
 [push]
