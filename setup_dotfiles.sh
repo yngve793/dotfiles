@@ -1,7 +1,15 @@
 #!/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc")
+dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc" ".tmux.conf")
 dir="${HOME}/dotfiles"
+
+# Check if there is an update in my repository
+if git pull ; then
+	#Deployed my normal dotfiles
+	echo "Looking for updates in my repository"
+else
+	exit $?
+fi
 
 echo "Set dir to ${dir}"
 
@@ -10,6 +18,12 @@ for dotfile in "${dotfiles[@]}";do
 #  echo  "${HOME}/${dotfile}"
 #  echo "${dir}/${dotfile}"
 		ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
+
+		case ${dotfile} in
+		  (.vimrc)	rm -rf "${HOME}/.vim"
+				ln -sf "${dir}/vim" "${HOME}/.vim";;
+		  (*) ;;
+		esac
 done
 
 deploy_configs () {
