@@ -12,8 +12,8 @@
 
 " no tabs for indentation, and indent should be 4 spaces
 :set expandtab
-:set tabstop=4
-:set shiftwidth=4
+:set tabstop=2
+:set shiftwidth=2
 
 " create file~ backups
 :set backup
@@ -42,3 +42,7 @@ au BufWinEnter ?* silent loadview
 
 " make sure some lines above or below current line are visible at all times
 :set scrolloff=5
+
+" Search ignores case if only lower case letters are used
+:set ignorecase
+:set smartcase

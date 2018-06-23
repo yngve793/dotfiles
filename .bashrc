@@ -71,26 +71,32 @@ MY_SSH_OPTIONS=-AYC
 alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
 #alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
 
-alias thinking_VSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinking_VSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinkingVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinkingVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias thinking_UuserLogin1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinking_UuserLogin2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinkingUuserLogin1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinkingUuserLogin2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias thinking_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinking_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
+alias thinkingXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
+alias thinkingXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
 
-alias breniac_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
-alias breniac_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
+alias breniacXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
+alias breniacXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
 
-alias genius_XuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE1}"
-alias genius_XuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}"
-alias genius_XuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
-alias genius_XuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
+alias breniacVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE1}"
+alias breniacVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE2}"
 
-alias batch_XuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
+alias geniusXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE1}"
+alias geniusXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}"
+alias geniusXuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
+alias geniusXuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
+
+alias batchXuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
+
 
 alias rm="rm -i"
+alias grep="grep --color"
+
 
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
