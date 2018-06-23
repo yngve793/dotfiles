@@ -144,9 +144,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 
 # volume control using pulseaudio
-bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume 0 +5%; killall -USR1 i3status"
-bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume 0 -5%; killall -USR1 i3status"
-bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute 0 toggle; killall -USR1 i3status"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "~/.config/i3/pactl-set-all-sinks-volume.sh +5%; killall -USR1 i3status"
+bindsym XF86AudioLowerVolume exec --no-startup-id "~/.config/i3/pactl-set-all-sinks-volume.sh -5%; killall -USR1 i3status"
+bindsym XF86AudioMute exec --no-startup-id "~/.config/i3/pactl-set-all-sinks-mute-toggle.sh; killall -USR1 i3status"
 
 # Media player controls
 # Note: Play/Pause key on T430 keyboard executes XF86AudioPause
