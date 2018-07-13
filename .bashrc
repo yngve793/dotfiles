@@ -91,6 +91,11 @@ alias geniusXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}
 alias geniusXuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
 alias geniusXuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
 
+alias geniusVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE1}"
+alias geniusVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE2}"
+alias geniusVSCuserLogin3="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE3}"
+alias geniusVSCuserLogin4="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE4}"
+
 alias batchXuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 
