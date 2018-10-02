@@ -101,12 +101,18 @@ alias batchXuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
 
 alias rm="rm -i"
 alias grep="grep --color"
+alias ls="ls --color"
 
 
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
   (CRD-L-05716) export DISPLAY=127.0.0.1:0
-  #export TERM=rxvt-unicode-256color
+#    export TERM=rxvt-unicode-256color
   ;;
   (*) ;;
 esac
+
+if [ "$COLORTERM" == "xfce4-terminal" ] ; then
+    export TERM=xterm-256color
+fi
+
