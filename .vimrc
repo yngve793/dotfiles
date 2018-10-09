@@ -4,6 +4,9 @@
 :set smartindent
 " but files with a C-like syntax are cindented
 :autocmd FileType c,cpp,h,java :set cindent
+" add pathogen
+execute pathogen#infect()
+filetype plugin indent on
 " do syntax highlighting
 :syntax on
 
