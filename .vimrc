@@ -44,11 +44,11 @@ au BufWinEnter ?* silent loadview
 
 " set color scheme
 " :colorscheme wombat
-":colorscheme desert
+:colorscheme desert
 syntax enable
-:let g:solarized_termcolors=256
-:set background=dark
-:colorscheme solarized
+":let g:solarized_termcolors=256
+":set background=dark
+":colorscheme solarized
 
 " make sure some lines above or below current line are visible at all times
 :set scrolloff=5
