@@ -18,12 +18,15 @@ filetype plugin indent on
 :set tabstop=2
 :set shiftwidth=2
 
+
+set t_Co=256
+
 " create file~ backups
 :set backup
 
 " highlight the cursor line, so that one sees where one is about to type
 :set cursorline
-:hi CursorLine cterm=NONE ctermbg=cyan ctermfg=black guibg=cyan guifg=black
+":hi CursorLine cterm=NONE ctermbg=cyan ctermfg=black guibg=cyan guifg=black
 
 " show a status line with 
 "   t: file name
@@ -41,7 +44,11 @@ au BufWinEnter ?* silent loadview
 
 " set color scheme
 " :colorscheme wombat
-:colorscheme desert
+":colorscheme desert
+syntax enable
+:let g:solarized_termcolors=256
+:set background=dark
+:colorscheme solarized
 
 " make sure some lines above or below current line are visible at all times
 :set scrolloff=5
