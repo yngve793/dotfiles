@@ -39,8 +39,8 @@ set t_Co=256
 
 " make sure views are auto-saved/loaded so that folds are preserved
 " between edit sessions
-au BufWinLeave ?* mkview
-au BufWinEnter ?* silent loadview
+"au BufWinLeave ?* mkview
+"au BufWinEnter ?* silent loadview
 
 " set color scheme
 " :colorscheme wombat
