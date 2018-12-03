@@ -29,7 +29,7 @@ done
 deploy_configs () {
   echo "Deploy directories in .config"
   appendname=$1
-  dotconfdir=$2
+  dotconfdirs=$2
   for dotconfdir in "${dotconfdirs[@]}";do
 		echo "Creating symlink for .config/${dotconfdir}"
 		rm -rf "${HOME}/.config/${dotconfdir}"
