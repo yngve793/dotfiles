@@ -37,7 +37,6 @@ export OMP_NUM_THREADS=1
 export EDITOR=vim
 
 #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
-export DISTCC_HOSTS="deepthought/5,lzo,cpp"
 
 
 #CoDiPack
@@ -47,61 +46,8 @@ export CODIPACKDIR=/opt/CoDiPack
 # Make Java use anti-aliasing for nicer fonts
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
-#archey3
-
-VSC_USERID=vsc31571
-U_USERID=u0120326
-X_USERID=x0120326
-
-TIER2_LOGIN_NODE1=login.hpc.kuleuven.be
-TIER2_LOGIN_NODE2=login2.hpc.kuleuven.be
-
-TIER1_LOGIN_NODE1=login1-tier1.hpc.kuleuven.be
-TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
-
-GENIUS_LOGIN_NODE1=login1-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE2=login2-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE3=login3-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE4=login4-tier2.hpc.kuleuven.be
-
-BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
-
 MY_SSH_OPTIONS=-AYC
 
-alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
-#alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
-
-alias thinkingVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias thinkingUuserLogin1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingUuserLogin2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias thinkingXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias breniacXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
-alias breniacXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
-
-alias breniacVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE1}"
-alias breniacVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE2}"
-
-alias geniusXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE1}"
-alias geniusXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}"
-alias geniusXuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
-alias geniusXuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
-
-alias geniusVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE1}"
-alias geniusVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE2}"
-alias geniusVSCuserLogin3="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE3}"
-alias geniusVSCuserLogin4="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE4}"
-
-alias batchXuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
-
-
-alias rm="rm -i"
-alias grep="grep --color"
-alias ls="ls --color"
 
 
 # Enable X-forwarding on windows subsystem
@@ -112,7 +58,36 @@ case $HOSTNAME in
   (*) ;;
 esac
 
+case $HOSTNAME in
+  (lapsgs24)
+    # Eigen
+    export CPLUS_INCLUDE_PATH="/usr/include/eigen3:$CPLUS_INCLUDE_PATH"
+
+    # PETSc
+    export PETSC_DIR=/usr/lib/petscdir/3.7
+    export LD_LIBRARY_PATH=$PETSC_DIR/lib:$LD_LIBRARY_PATH
+    export CPATH=$PETSC_DIR/include:$CPATH
+    export LIBRARY_PATH=$PETSC_DIR/lib:$LIBARY_PATH
+    export PYTHONPATH=$PETSC_DIR/lib:$PYTHONPATH
+#    export TERM=rxvt-unicode-256color
+
+    export PRECICE_ROOT=/home/jaustar/projects/precice/precice-1.3.0
+    export LD_LIBRARY_PATH=${PRECICE_ROOT}/build/last:${LD_LIBRARY_PATH}
+  ;;
+  (*) ;;
+esac
+
 if [ "$COLORTERM" == "xfce4-terminal" ] ; then
     export TERM=xterm-256color
 fi
+
+alias rm="rm -i"
+alias grep="grep --color"
+alias ls="ls --color"
+alias ll='ls -lah'
+alias ln='ln -i'
+alias h='history'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias reactiveKeyboardToggle='setxkbmap -model pc105 -layout de,us -option grp:alt_space_toggle'
 

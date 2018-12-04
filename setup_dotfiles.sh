@@ -51,6 +51,7 @@ appendname=""
 
 case $HOSTNAME in
   (CRD-L-05716) appendname="linuxSubsystem/";;
+  (lapsgs24) appendname="lapsgs24/";;
   (*) appendname="";;
 esac
 echo "Set appendname to ${appendname}"
