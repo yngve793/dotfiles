@@ -73,6 +73,12 @@ case $HOSTNAME in
 
     export PRECICE_ROOT=/home/jaustar/projects/precice/precice-1.3.0
     export LD_LIBRARY_PATH=${PRECICE_ROOT}/build/last:${LD_LIBRARY_PATH}
+
+    export SU2_RUN=/home/jaustar/software/su2/SU2-6.0.0-install/bin
+    export SU2_HOME=/home/jaustar/software/su2/SU2-6.0.0
+    
+    export PATH=$PATH:${SU2_RUN}
+    export PYTHONPATH=$SU2_RUN:${PYTHONPATH}
   ;;
   (*) ;;
 esac

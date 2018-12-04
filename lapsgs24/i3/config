@@ -211,7 +211,7 @@ bar {
 # Menu for logging of, shutdown etc.
 #set $Locker i3lock && sleep 1
 #
-exec --no-startup-id xautolock -time 8 -locker "i3lock"
+exec --no-startup-id xautolock -time 12 -locker "i3lock"
 set $Locker i3lock && sleep 1
 
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
