@@ -251,5 +251,6 @@ exec --no-startup-id compton
 ## OSD
 exec --no-startup-id dunst 
 #
-exec xrandr --dpi 96
-
+exec --no-startup-id ~/.screenlayout/main_only.sh
+#
+exec --no-startup-id xrandr --dpi 96
