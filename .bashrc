@@ -89,6 +89,9 @@ case $HOSTNAME in
     module load Togl/1.7
     module load NGSolve/5.0.0-opt
 
+
+#    module load miniconda3/Latest
+    module load pdfsam
     # Eigen
 #    export CPLUS_INCLUDE_PATH="/usr/include/eigen3:$CPLUS_INCLUDE_PATH"
 
@@ -137,7 +140,7 @@ case $HOSTNAME in
 #    export SPOOLESDIR=
     # JabRef
 #    alias jabref="java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
-    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar JabRef-4.3.1.jar"
+    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
   ;;
   (*) 
     export CODIPACKDIR=/opt/CoDiPack
