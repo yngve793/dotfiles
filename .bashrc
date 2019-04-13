@@ -2,9 +2,27 @@
 # ~/.bashrc
 #
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+fi
+
+
 # Source standard bashrc
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
+  (lapsgs24) 
+    source /etc/bash.bashrc
+#    source /etc/profile.d/lmod.sh
+    export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
+    export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
+    ;;
   (*) ;;
 esac
 
@@ -30,6 +48,10 @@ else
 	fi
 fi
 
+# enable bash completion in interactive shells
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
 
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
@@ -39,93 +61,66 @@ export OMP_NUM_THREADS=1
 
 export EDITOR=vim
 
-#export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
-export DISTCC_HOSTS="deepthought/5,lzo,cpp"
 
-
-#CoDiPack
-export CODIPACKDIR=/opt/CoDiPack
 
 # JAVA
 # Make Java use anti-aliasing for nicer fonts
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
-
-#archey3
-
-VSC_USERID=vsc31571
-U_USERID=u0120326
-X_USERID=x0120326
-
-TIER2_LOGIN_NODE1=login.hpc.kuleuven.be
-TIER2_LOGIN_NODE2=login2.hpc.kuleuven.be
-
-TIER1_LOGIN_NODE1=login1-tier1.hpc.kuleuven.be
-TIER1_LOGIN_NODE2=login2-tier1.hpc.kuleuven.be
-
-GENIUS_LOGIN_NODE1=login1-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE2=login2-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE3=login3-tier2.hpc.kuleuven.be
-GENIUS_LOGIN_NODE4=login4-tier2.hpc.kuleuven.be
-
-BATCH_LOGIN_NODE=tier2-p-batch-1.icts.hpc.kuleuven.be
-
-MY_SSH_OPTIONS=-AYC
-
-alias matlabJAVA8="echo 'Starting Matlab with Java 8';MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab"
-#alias matlab='MATLAB_JAVA=/usr/lib/jvm/java-8-openjdk/jre/  matlab -softwareopengl' 
-
-alias thinkingVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias thinkingUuserLogin1="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingUuserLogin2="ssh ${MY_SSH_OPTIONS} ${U_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias thinkingXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE1}"
-alias thinkingXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER2_LOGIN_NODE2}"
-
-alias breniacXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE1}"
-alias breniacXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${TIER1_LOGIN_NODE2}"
-
-alias breniacVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE1}"
-alias breniacVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${TIER1_LOGIN_NODE2}"
-
-alias geniusXuserLogin1="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE1}"
-alias geniusXuserLogin2="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE2}"
-alias geniusXuserLogin3="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE3}"
-alias geniusXuserLogin4="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${GENIUS_LOGIN_NODE4}"
-
-alias geniusVSCuserLogin1="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE1}"
-alias geniusVSCuserLogin2="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE2}"
-alias geniusVSCuserLogin3="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE3}"
-alias geniusVSCuserLogin4="ssh ${MY_SSH_OPTIONS} ${VSC_USERID}@${GENIUS_LOGIN_NODE4}"
-
-alias batchXuserLogin="ssh ${MY_SSH_OPTIONS} ${X_USERID}@${BATCH_LOGIN_NODE}"
-
-
-alias rm="rm -i"
-alias grep="grep --color"
-alias ls="ls --color"
-
 
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
   (CRD-L-05716) export DISPLAY=127.0.0.1:0
 #    export TERM=rxvt-unicode-256color
   ;;
-  (archpc)
-    export NETGENDIR=/opt/netgen-5.0.0-opt/bin
-    export PATH=${NETGENDIR}:${PATH}
-    export LD_LIBRARY_PATH=${NETGENDIR}/../lib:$LD_LIBRARY_PATH
-    export PETSC_DIR=/opt/petsc-3.6.1-opt
-    export LD_LIBRARY_PATH=${PETSC_DIR}/lib:$LD_LIBRARY_PATH
-
-    export DISTCC_HOSTS="localhost/9,lzo,cpp deepthought/5,lzo,cpp"
-    ;;
-
   (*) ;;
+esac
+
+
+case $HOSTNAME in
+  (lapsgs24)
+
+    module load Eigen/3-Ubuntu
+    module load PETSc/3.7.7-Ubuntu
+    module load preCICE/1.3-Debug-PETSc-Python
+
+    module load CoDiPack/1.7
+    module load Togl/1.7
+    module load NGSolve/5.0.0-opt
+
+    module load pdfsam
+
+    # Calculix adapter
+    export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
+    # yaml for calculix adapter
+    export LD_LIBRARY_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/build:${LD_LIBRARY_PATH}
+    export CPLUS_INCLUDE_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/include:${CPLUS_INCLUDE_PATH}
+
+    # OpenFOAM
+    . /opt/openfoam5/etc/bashrc
+    # JabRef
+    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
+  ;;
+
+  (*) 
+    export CODIPACKDIR=/opt/CoDiPack
+    #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
+    export DISTCC_HOSTS="deepthought/5,lzo,cpp"
+    export CODIPACKDIR=/opt/CoDiPack
+  ;;
 esac
 
 if [ "$COLORTERM" == "xfce4-terminal" ] ; then
     export TERM=xterm-256color
 fi
+
+
+alias rm="rm -i"
+alias grep="grep --color"
+alias ls="ls --color"
+alias ll='ls -lah'
+alias ln='ln -i'
+alias h='history'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias reactiveKeyboardToggle='setxkbmap -model pc105 -layout de,us -option grp:alt_space_toggle'
 

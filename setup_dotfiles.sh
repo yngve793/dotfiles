@@ -26,10 +26,23 @@ for dotfile in "${dotfiles[@]}";do
 		esac
 done
 
-deploy_configs () {
+
+deploy_config_files () {
+  echo "Deploy directories in .config"
+  d=$1
+  configfiles=$2
+  for configfile in "${configfiles[@]}";do
+		echo "Creating symlink for .config/${configfile}"
+		rm -f "${HOME}/.config/${configfile}"
+		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"		
+  done
+}
+
+
+deploy_configs_dirs () {
   echo "Deploy directories in .config"
   appendname=$1
-  dotconfdir=$2
+  dotconfdirs=$2
   for dotconfdir in "${dotconfdirs[@]}";do
 		echo "Creating symlink for .config/${dotconfdir}"
 		rm -rf "${HOME}/.config/${dotconfdir}"
@@ -39,10 +52,13 @@ deploy_configs () {
 
 # Deployment of configurations residing in .config/
 
+general_config_files=("")
+deploy_config_files "${config_files}"
+
 # System-independent 
 dotconfdirsSystemIndependent=("dunst")
 # Deploy
-deploy_configs "" "${dotconfdirsSystemIndependent}"
+deploy_configs_dirs "" "${dotconfdirsSystemIndependent}"
 
 # System-dependent
 dotconfdirsSystemDependent=("i3")
@@ -51,10 +67,13 @@ appendname=""
 
 case $HOSTNAME in
   (CRD-L-05716) appendname="linuxSubsystem/";;
+  (lapsgs24) appendname="lapsgs24/";;
   (*) appendname="";;
 esac
 echo "Set appendname to ${appendname}"
 
-deploy_configs "${appendname}" "${dotconfdirsSystemDependent}"
+deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent}"
 
+platform_config_files=("rdiff-exclude")
+deploy_config_files "${appendname}" "${platform_config_files}"
 
