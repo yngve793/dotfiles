@@ -15,7 +15,10 @@ esac
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
 if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
+    #eval $(gnome-keyring-daemon --start)
+    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+    dbus-update-activation-environment --systemd DISPLAY
     export SSH_AUTH_SOCK
 else
 #Start ssh-agent
@@ -109,6 +112,16 @@ case $HOSTNAME in
   (CRD-L-05716) export DISPLAY=127.0.0.1:0
 #    export TERM=rxvt-unicode-256color
   ;;
+  (archpc)
+    export NETGENDIR=/opt/netgen-5.0.0-opt/bin
+    export PATH=${NETGENDIR}:${PATH}
+    export LD_LIBRARY_PATH=${NETGENDIR}/../lib:$LD_LIBRARY_PATH
+    export PETSC_DIR=/opt/petsc-3.6.1-opt
+    export LD_LIBRARY_PATH=${PETSC_DIR}/lib:$LD_LIBRARY_PATH
+
+    export DISTCC_HOSTS="localhost/9,lzo,cpp deepthought/5,lzo,cpp"
+    ;;
+
   (*) ;;
 esac
 
