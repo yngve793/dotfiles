@@ -106,6 +106,16 @@ case $HOSTNAME in
     #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
     export CODIPACKDIR=/opt/CoDiPack
+    case ${HOSTNAME} in
+    (archpc)
+      export PETSC_DIR=/opt/petsc-3.11.1-opt
+      export NETGENDIR=/opt/netgen-5.0.0-opt/bin
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib
+      export PATH=$PATH:$NETGENDIR
+      ;;
+    (*)
+      ;;
+  esac
   ;;
 esac
 
