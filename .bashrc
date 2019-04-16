@@ -26,12 +26,17 @@ case $HOSTNAME in
   (*) ;;
 esac
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
 
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
 if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
+    #eval $(gnome-keyring-daemon --start)
+    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+    dbus-update-activation-environment --systemd DISPLAY
     export SSH_AUTH_SOCK
 else
 #Start ssh-agent
@@ -48,27 +53,19 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
+alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
-#resetcolor="$(tput sgr0)"
-#PS1='\[\e]0;\w\a\]\n\[\e[32m\]\u@\h \[\e[33m\]\w\n${resetcolor}\$ '
 
 
 export OMP_NUM_THREADS=1
 
 export EDITOR=vim
 
-#export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
 
-
-#CoDiPack
 
 # JAVA
 # Make Java use anti-aliasing for nicer fonts
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
-
-MY_SSH_OPTIONS=-AYC
-
-
 
 # Enable X-forwarding on windows subsystem
 case $HOSTNAME in
@@ -77,6 +74,7 @@ case $HOSTNAME in
   ;;
   (*) ;;
 esac
+
 
 case $HOSTNAME in
   (lapsgs24)
@@ -89,44 +87,7 @@ case $HOSTNAME in
     module load Togl/1.7
     module load NGSolve/5.0.0-opt
 
-
-#    module load miniconda3/Latest
     module load pdfsam
-    # Eigen
-#    export CPLUS_INCLUDE_PATH="/usr/include/eigen3:$CPLUS_INCLUDE_PATH"
-
-    # PETSc
-#    export PETSC_DIR=/usr/lib/petscdir/3.7
-#    export PETSC_DIR=/usr/lib/x86_64-linux-gnu/
-#    export PETSC_DIR=/usr/lib/petscdir/3.7.7/x86_64-linux-gnu-real
-#    export PETSC_ARCH=""
-#    export PETSC_ARCH=x86_64-linux-gnu-real
-#    export LD_LIBRARY_PATH=$PETSC_DIR/lib:$LD_LIBRARY_PATH
-#    export CPATH=$PETSC_DIR/include:$CPATH
-#    export LIBRARY_PATH=$PETSC_DIR/lib:$LIBARYhiPATH
-#    export PYTHONPATH=$PETSC_DIR/lib:$PYTHONPATH
-#    export TERM=rxvt-unicode-256color
-
-#    export PRECICE_ROOT=/home/jaustar/projects/precice/precice-1.3.0
-#    export LD_LIBRARY_PATH=${PRECICE_ROOT}/build/debug:${LD_LIBRARY_PATH}
-
-#    export SU2_RUN=/home/jaustar/software/su2/SU2-6.0.0-install/bin
-#    export SU2_HOME=/home/jaustar/software/su2/SU2-6.0.0
-    
-#    export PATH=$PATH:${SU2_RUN}
-#    export PYTHONPATH=$SU2_RUN:${PYTHONPATH}
-
-#    export SOFTWAREBASEDIR=${HOME}/software
-
-#    export NETGENDIR=${SOFTWAREBASEDIR}/installed/netgen-5.0.0-opt/bin
-#    export PATH=${NETGENDIR}:${PATH}
-#    export LD_LIBRARY_PATH=${NETGENDIR}/../lib:${LD_LIBRARY_PATH}
-#    export CPATH=${NETGENDIR}/../include:${CPATH}
-
-#    export LD_LIBRARY_PATH=/home/jaustar/software/installed/Togl-1.7/lib:${LD_LIBRARY_PATH}
-#    export CPATH=/home/jaustar/software/installed/Togl-1.7/include:${CPATH}
-
-#    export CODIPACKDIR=/home/jaustar/software/installed/CoDiPack-1.7
 
     # Calculix adapter
     export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
@@ -136,13 +97,14 @@ case $HOSTNAME in
 
     # OpenFOAM
     . /opt/openfoam5/etc/bashrc
-#    export LD_LIBRARY_PATH=${SOFTWAREBASEDIR}/SPOOLES.2.2/
-#    export SPOOLESDIR=
     # JabRef
-#    alias jabref="java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
     alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
   ;;
+
   (*) 
+    export CODIPACKDIR=/opt/CoDiPack
+    #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
+    export DISTCC_HOSTS="deepthought/5,lzo,cpp"
     export CODIPACKDIR=/opt/CoDiPack
   ;;
 esac
@@ -150,6 +112,7 @@ esac
 if [ "$COLORTERM" == "xfce4-terminal" ] ; then
     export TERM=xterm-256color
 fi
+
 
 alias rm="rm -i"
 alias grep="grep --color"
