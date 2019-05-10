@@ -5,4 +5,6 @@
 [core]
 	excludesfile = ~/.gitignore_global
 [diff]
-	tool = meld
+  tool = meld
+[push]
+  default = simple
