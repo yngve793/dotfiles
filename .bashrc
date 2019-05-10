@@ -23,7 +23,14 @@ case $HOSTNAME in
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
-  (*) ;;
+  (*) 
+	if [[ -f /etc/bash.bashrc ]]; then
+		source /etc/bash.bashrc
+	fi
+  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+    source /usr/local.nfs/rc/bashrc
+  fi
+	;;
 esac
 
 # If not running interactively, don't do anything
