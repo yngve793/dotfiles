@@ -1,8 +1,8 @@
 [user]
 	editor = vim
 	name = Alexander Jaust
-	email = alexander.jaust@uhasselt.be
+	email = alexander.jaust@ipvs.uni-stuttgart.de
 [core]
-	excludesfile = /home/alex/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [diff]
 	tool = meld
