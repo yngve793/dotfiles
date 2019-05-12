@@ -6,5 +6,5 @@
 	excludesfile = ~/.gitignore_global
 [diff]
   tool = meld
-[credential]
-helper = /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+[push]
+  default = simple

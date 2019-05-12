@@ -23,7 +23,14 @@ case $HOSTNAME in
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
-  (*) ;;
+  (*) 
+	if [[ -f /etc/bash.bashrc ]]; then
+		source /etc/bash.bashrc
+	fi
+  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+    source /usr/local.nfs/rc/bashrc
+  fi
+	;;
 esac
 
 # If not running interactively, don't do anything
@@ -81,7 +88,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.3-Debug-PETSc-Python
+    module load preCICE/1.4-Release-MPI-PETSc-Python
 
     module load CoDiPack/1.7
     module load Togl/1.7
