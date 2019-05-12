@@ -14,44 +14,50 @@ fi
 echo "Set dir to ${dir}"
 
 for dotfile in "${dotfiles[@]}";do
-		echo "Creating symlink for ${dotfile}"
-#  echo  "${HOME}/${dotfile}"
-#  echo "${dir}/${dotfile}"
-		ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
 
-		case ${dotfile} in
-		  (.vimrc)	rm -rf "${HOME}/.vim"
-				ln -sf "${dir}/vim" "${HOME}/.vim";;
-		  (*) ;;
-		esac
+    if [[ -f "${dir}/${dotfile}" ]]; then 
+		  echo "Creating symlink for ${dotfile}"
+  #  echo  "${HOME}/${dotfile}"
+  #  echo "${dir}/${dotfile}"
+		  ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
+
+		  case ${dotfile} in
+		    (.vimrc)	rm -rf "${HOME}/.vim"
+				  ln -sf "${dir}/vim" "${HOME}/.vim";;
+		    (*) ;;
+		  esac
+		fi
 done
 
 
 deploy_config_files () {
-  echo "Deploy directories in .config"
+  echo "Deploy config files in .config/"
   d=$1
   configfiles=$2
   for configfile in "${configfiles[@]}";do
-		echo "Creating symlink for .config/${configfile}"
-		rm -f "${HOME}/.config/${configfile}"
-		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"		
+		if [[ -f "${dir}/${d}${configfile}" ]]; then
+  		echo "Creating symlink for .config/${configfile}"
+  		rm -f "${HOME}/.config/${configfile}"
+  		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"		
+		fi
   done
 }
 
 
 deploy_configs_dirs () {
-  echo "Deploy directories in .config"
+  echo "Deploy directories in .config/"
   appendname=$1
   dotconfdirs=$2
   for dotconfdir in "${dotconfdirs[@]}";do
-		echo "Creating symlink for .config/${dotconfdir}"
-		rm -rf "${HOME}/.config/${dotconfdir}"
-		ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
+    if [[ -d "${dir}/${appendname}${dotconfdir}" ]]; then
+		  echo "Creating symlink for .config/${dotconfdir}"
+		  rm -rf "${HOME}/.config/${dotconfdir}"
+		  ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
+		fi
   done
 }
 
 # Deployment of configurations residing in .config/
-
 general_config_files=("")
 deploy_config_files "${config_files}"
 
@@ -67,7 +73,8 @@ appendname=""
 
 case $HOSTNAME in
   (CRD-L-05716) appendname="linuxSubsystem/";;
-  (lapsgs24) appendname="lapsgs24/";;
+  (lapsgs24) appendname="$HOSTNAME/";;
+  (archpc) appendname="$HOSTNAME/";;
   (*) appendname="";;
 esac
 echo "Set appendname to ${appendname}"
