@@ -13,28 +13,34 @@ if [ -d /etc/profile.d ]; then
   done
 fi
 
+if [[ -f ~/.bash_aliases ]]; then
+  source ~/.bash_aliases
+fi
 
 # Source standard bashrc
+if [[ -f /etc/bash.bashrc ]]; then
+	source /etc/bash.bashrc
+fi
+if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+  source /usr/local.nfs/rc/bashrc
+fi
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
-    source /etc/bash.bashrc
 #    source /etc/profile.d/lmod.sh
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
   (*) 
-	if [[ -f /etc/bash.bashrc ]]; then
-		source /etc/bash.bashrc
-	fi
-  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
-    source /usr/local.nfs/rc/bashrc
-  fi
 	;;
 esac
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Keep 1000 lines in .bash_history (default is 500)
+export HISTSIZE=1000
+export HISTFILESIZE=1000
 
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
@@ -60,7 +66,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-alias ls='ls --color=auto'
+
 PS1='[\u@\h \W]\$ '
 
 
@@ -105,7 +111,6 @@ case $HOSTNAME in
     # OpenFOAM
     . /opt/openfoam5/etc/bashrc
     # JabRef
-    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
   ;;
 
   (*) 
@@ -142,19 +147,7 @@ case $HOSTNAME in
   ;;
 esac
 
-if [ "$COLORTERM" == "xfce4-terminal" ] ; then
-    export TERM=xterm-256color
-fi
-
-
-alias rm="rm -i"
-alias grep="grep --color"
-alias ls="ls --color"
-alias ll='ls -lah'
-alias ln='ln -i'
-alias h='history'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias reactiveKeyboardToggle='setxkbmap -model pc105 -layout de,us -option grp:alt_space_toggle'
-
+#if [ "$COLORTERM" == "xfce4-terminal" ] ; then
+#    export TERM=xterm-256color
+#fi
 
