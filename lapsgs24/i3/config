@@ -114,14 +114,16 @@ set $tag1 "1:www"
 set $tag2 "2:mail"
 set $tag3 "3:code"
 set $tag4 "4:log"
+set $tag5 "5:latex"
+set $tag6 "6:cluster"
 
 # switch to workspace
 bindsym $mod+1 workspace $tag1
 bindsym $mod+2 workspace $tag2
 bindsym $mod+3 workspace $tag3
 bindsym $mod+4 workspace $tag4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
+bindsym $mod+5 workspace $tag5
+bindsym $mod+6 workspace $tag6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -132,8 +134,8 @@ bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
 bindsym $mod+Shift+3 move container to workspace $tag3
 bindsym $mod+Shift+4 move container to workspace $tag4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+5 move container to workspace $tag5
+bindsym $mod+Shift+6 move container to workspace $tag6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
@@ -221,12 +223,7 @@ set $yellow 	#E6DB74
 set $green 	#A6E22E 
 set $blue 	#66D9EF 
 set $purple 	#AE81FF 
-#set $pink              #F92672
-#set $blue              #66D9EF
-#set $green             #A6E22E
-#set $orange            #FD971F
-#set $yellow            #E6DB74
-#set $purple #AE81FF
+set $gray1 	#404135
 
 bar {
         status_command i3status -c ~/.config/i3/i3status.conf
@@ -243,6 +240,17 @@ bar {
 #    background #272822
 #    statusline #272822
 #    separator #75715E
+  }
+
+  colors {
+    background $black
+    statusline $fgcolor
+    separator $gray1
+    # Type             border  background font
+    focused_workspace  $red $gray1 $red           
+    active_workspace   $gray1 $black $orange
+    inactive_workspace $gray1 $black $green
+    urgent_workspace   $orange $red $white
   }
 
         # Type             border  background font
