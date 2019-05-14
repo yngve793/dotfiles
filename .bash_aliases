@@ -4,6 +4,7 @@ alias ls='ls --color=auto'
 alias ll='ls -lah'
 alias l="ls"
 alias ln='ln -i'
+alias la='ls -A'
 alias h='history'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
