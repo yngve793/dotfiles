@@ -247,10 +247,10 @@ bar {
     statusline $fgcolor
     separator $gray1
     # Type             border  background font
-    focused_workspace  $red $gray1 $red           
+    focused_workspace  $fgcolor $gray1 $red           
     active_workspace   $gray1 $black $orange
     inactive_workspace $gray1 $black $green
-    urgent_workspace   $orange $red $white
+    urgent_workspace   $purple $gray1 $red
   }
 
         # Type             border  background font

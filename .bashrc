@@ -35,6 +35,17 @@ case $HOSTNAME in
 	;;
 esac
 
+case $HOSTNAME in
+  (lapsgs24) 
+    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+    ;;
+  (neon | helium)
+    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+    ;;
+  (*)
+    ;;
+esac 
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -67,7 +78,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 
-PS1='[\u@\h \W]\$ '
+#PS1='[\u@\h \W]\$ '
 
 
 export OMP_NUM_THREADS=1
