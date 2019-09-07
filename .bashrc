@@ -5,13 +5,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -d /etc/profile.d ]; then
-  for i in /etc/profile.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
-fi
+#if [ -d /etc/profile.d ]; then
+#  for i in /etc/profile.d/*.sh; do
+#    if [ -r $i ]; then
+#      . $i
+#    fi
+#  done
+#fi
 
 
 # Source standard bashrc
@@ -24,12 +24,12 @@ case $HOSTNAME in
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
   (*) 
-	if [[ -f /etc/bash.bashrc ]]; then
-		source /etc/bash.bashrc
-	fi
-  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
-    source /usr/local.nfs/rc/bashrc
-  fi
+#	if [[ -f /etc/bash.bashrc ]]; then
+#		source /etc/bash.bashrc
+#	fi
+#  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+#    source /usr/local.nfs/rc/bashrc
+#  fi
 	;;
 esac
 
@@ -39,11 +39,13 @@ esac
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
-if [ -n "$DESKTOP_SESSION" ];then
+if [[ ! -z "${DESKTOP_SESSION}" ]];then
     #eval $(gnome-keyring-daemon --start)
-    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+    echo "Starting gnome keyring as we are running a desktop session"
+    echo "Value of DESKTOP_SESSION ${DESKTOP_SESSION}"
+#    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
     export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-    dbus-update-activation-environment --systemd DISPLAY
+#    dbus-update-activation-environment --systemd DISPLAY
     export SSH_AUTH_SOCK
 else
 #Start ssh-agent
@@ -61,8 +63,21 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+#PS1='[\u@\h \W]\$ '
+#PS1='\[\e[1;35m\]\u\[\e[m\] \[\e[1;36m\]\w\[\e[m\] \[\e[1;32m\]> \[\e[m\]\[\e[0;37m\]'
+#PS2='>'
+#if [[ ${EUID} == 0 ]] ; then
+#		sq_color="\[\033[0;31m\]"
+#else		
+#	sq_color="\[\033[0;34m\]"
+##PS1="$sq_color\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[01;37m\]\342\234\227$sq_color]\342\224\200\")[\[\033[01;37m\]\t$sq_color]\342\224\200[\[\033[01;37m\]\u@\h$sq_color]\n\342\224\224\342\224\200\342\224\200> \[\033[01;37m\]\W$sq_color $ \[\033[01;37m\]>>\\[\\033[0m\\] "
+#unset sq_color
 
+# http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04
+#PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)\[\033[1;37m\])\342\224\200(\$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi)\[\033[1;37m\])\342\224\200(\[\033[1;34m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
+
+# http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04
+PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)\[\033[1;37m\])\$([[ \$? != 0 ]] && echo \"\342\224\200(\[\033[0;31m\]\342\234\227\[\033[1;37m\])\")\342\224\200(\[\033[1;34m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
 
 export OMP_NUM_THREADS=1
 
@@ -122,18 +137,18 @@ case $HOSTNAME in
       # added by Miniconda3 4.5.12 installer
       # >>> conda init >>>
       # !! Contents within this block are managed by 'conda init' !!
-      __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/alex/software/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
-      if [ $? -eq 0 ]; then
-          \eval "$__conda_setup"
-      else
-          if [ -f "/home/alex/software/miniconda3/etc/profile.d/conda.sh" ]; then
-              . "/home/alex/software/miniconda3/etc/profile.d/conda.sh"
-              CONDA_CHANGEPS1=false conda activate base
-          else
-              \export PATH="/home/alex/software/miniconda3/bin:$PATH"
-          fi
-      fi
-      unset __conda_setup
+#      __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/alex/software/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
+#      if [ $? -eq 0 ]; then
+#          \eval "$__conda_setup"
+#      else
+#          if [ -f "/home/alex/software/miniconda3/etc/profile.d/conda.sh" ]; then
+#              . "/home/alex/software/miniconda3/etc/profile.d/conda.sh"
+#              CONDA_CHANGEPS1=false conda activate base
+#          else
+#              \export PATH="/home/alex/software/miniconda3/bin:$PATH"
+#          fi
+#      fi
+#      unset __conda_setup
       # <<< conda init <<<
       ;;
     (*)
