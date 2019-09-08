@@ -13,28 +13,44 @@
 #  done
 #fi
 
+if [[ -f ~/.bash_aliases ]]; then
+  source ~/.bash_aliases
+fi
 
 # Source standard bashrc
+if [[ -f /etc/bash.bashrc ]]; then
+	source /etc/bash.bashrc
+fi
+if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+  source /usr/local.nfs/rc/bashrc
+fi
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
-    source /etc/bash.bashrc
 #    source /etc/profile.d/lmod.sh
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
-  (*) 
-#	if [[ -f /etc/bash.bashrc ]]; then
-#		source /etc/bash.bashrc
-#	fi
-#  if [[ -f /usr/local.nfs/rc/bashrc ]]; then
-#    source /usr/local.nfs/rc/bashrc
-#  fi
-	;;
+  (*) ;;
 esac
+
+case $HOSTNAME in
+  (lapsgs24) 
+    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+    ;;
+  (neon | helium)
+    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+    ;;
+  (*)
+    ;;
+esac 
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+
+# Keep 1000 lines in .bash_history (default is 500)
+export HISTSIZE=1000
+export HISTFILESIZE=1000
 
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
@@ -47,6 +63,7 @@ if [[ ! -z "${DESKTOP_SESSION}" ]];then
     export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 #    dbus-update-activation-environment --systemd DISPLAY
     export SSH_AUTH_SOCK
+#  echo "Don't do anything about the ssh keys"
 else
 #Start ssh-agent
 	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -103,7 +120,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.4-Release-MPI-PETSc-Python
+    module load preCICE/1.5.2-Release-MPI-PETSc-Python
 
     module load CoDiPack/1.7
     module load Togl/1.7
@@ -120,7 +137,6 @@ case $HOSTNAME in
     # OpenFOAM
     . /opt/openfoam5/etc/bashrc
     # JabRef
-    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
   ;;
 
   (*) 
@@ -157,19 +173,7 @@ case $HOSTNAME in
   ;;
 esac
 
-if [ "$COLORTERM" == "xfce4-terminal" ] ; then
-    export TERM=xterm-256color
-fi
-
-
-alias rm="rm -i"
-alias grep="grep --color"
-alias ls="ls --color"
-alias ll='ls -lah'
-alias ln='ln -i'
-alias h='history'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias reactiveKeyboardToggle='setxkbmap -model pc105 -layout de,us -option grp:alt_space_toggle'
-
+#if [ "$COLORTERM" == "xfce4-terminal" ] ; then
+#    export TERM=xterm-256color
+#fi
 

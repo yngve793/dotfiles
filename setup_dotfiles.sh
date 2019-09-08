@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc" ".tmux.conf")
+dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc" ".tmux.conf" ".bash_aliases")
 dir="${HOME}/dotfiles"
 
 # Check if there is an update in my repository
