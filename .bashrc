@@ -58,10 +58,12 @@ export HISTFILESIZE=1000
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
 if [ -n "$DESKTOP_SESSION" ];then
     #eval $(gnome-keyring-daemon --start)
-    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-#    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-#    dbus-update-activation-environment --systemd DISPLAY
+#    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
+    #export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
+    eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
+#    dbus-update-activation-environment --systemd DISPLAY§
+#    export SSH_AUTH_SOCK
 #  echo "Don't do anything about the ssh keys"
 else
 #Start ssh-agent
@@ -106,7 +108,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.5.2-Release-MPI-PETSc-Python
+    module load preCICE/1.6.0-Release-MPI-PETSc-Python
 
     module load CoDiPack/1.7
     module load Togl/1.7
