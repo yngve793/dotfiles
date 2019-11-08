@@ -31,7 +31,14 @@ case $HOSTNAME in
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
-  (*) ;;
+  (neon)
+    export MODULEPATH=${MODULEPATH}:/data/scratch/jaustar/modulefiles
+    module purge
+    module load preCICE/1.6.0-opt
+    module load cmake/3.12.1
+    ;;
+  (*) 
+	;;
 esac
 
 case $HOSTNAME in
@@ -44,6 +51,8 @@ case $HOSTNAME in
   (*)
     ;;
 esac 
+
+
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -145,12 +154,44 @@ case $HOSTNAME in
     . /opt/openfoam5/etc/bashrc
     # JabRef
   ;;
-
+  (sgscl*)
+    echo "Loading conda paths"
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/scratch-nfs/jaustar/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+    else
+      if [ -f "/scratch-nfs/jaustar/miniconda/etc/profile.d/conda.sh" ]; then
+          . "/scratch-nfs/jaustar/miniconda/etc/profile.d/conda.sh"
+      else
+          export PATH="/scratch-nfs/jaustar/miniconda/bin:$PATH"
+      fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+  ;;
+  (helium)
+  
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+    else
+      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
+          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
+      else
+          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
+      fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+  ;;
   (*) 
     export CODIPACKDIR=/opt/CoDiPack
     #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
-    export CODIPACKDIR=/opt/CoDiPack
     case ${HOSTNAME} in
     (archpc)
       export PETSC_DIR=/opt/petsc-3.11.1-opt
@@ -183,4 +224,6 @@ esac
 #if [ "$COLORTERM" == "xfce4-terminal" ] ; then
 #    export TERM=xterm-256color
 #fi
+
+
 
