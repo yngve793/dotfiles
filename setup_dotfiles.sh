@@ -81,6 +81,6 @@ echo "Set appendname to ${appendname}"
 
 deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent}"
 
-platform_config_files=("rdiff-exclude")
+platform_config_files=("rdiff-exclude rdiff-include")
 deploy_config_files "${appendname}" "${platform_config_files}"
 
