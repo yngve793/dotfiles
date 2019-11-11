@@ -45,7 +45,7 @@ case $HOSTNAME in
   (lapsgs24) 
     export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
-  (neon | helium | sgscl* kepler | vgpu | argon* )
+  (neon | helium | sgscl* | kepler | vgpu | argon* )
     export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
   (*)
