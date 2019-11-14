@@ -5,13 +5,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#if [ -d /etc/profile.d ]; then
-#  for i in /etc/profile.d/*.sh; do
-#    if [ -r $i ]; then
-#      . $i
-#    fi
-#  done
-#fi
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+fi
 
 if [[ -f ~/.bash_aliases ]]; then
   source ~/.bash_aliases
@@ -31,19 +31,28 @@ case $HOSTNAME in
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
     ;;
-  (*) ;;
+  (neon)
+    export MODULEPATH=${MODULEPATH}:/data/scratch/jaustar/modulefiles
+    module purge
+    module load preCICE/1.6.0-opt
+    module load cmake/3.12.1
+    ;;
+  (*) 
+	;;
 esac
 
 case $HOSTNAME in
   (lapsgs24) 
-    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+    export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
-  (neon | helium)
-    export PS1='\[\033[0;32m\]\u\[\033[0;36m\] @ \h \w\[\033[0;32m\]$(__git_ps1)\n└─ ▶\[\033[0m\] '
+  (neon | helium | sgscl* | kepler | vgpu | argon* )
+    export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
   (*)
     ;;
 esac 
+
+
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -94,14 +103,16 @@ alias ls='ls --color=auto'
 #		sq_color="\[\033[0;31m\]"
 #else		
 #	sq_color="\[\033[0;34m\]"
-##PS1="$sq_color\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[01;37m\]\342\234\227$sq_color]\342\224\200\")[\[\033[01;37m\]\t$sq_color]\342\224\200[\[\033[01;37m\]\u@\h$sq_color]\n\342\224\224\342\224\200\342\224\200> \[\033[01;37m\]\W$sq_color $ \[\033[01;37m\]>>\\[\\033[0m\\] "
+#PS1="$sq_color\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[01;37m\]\342\234\227$sq_color]\342\224\200\")[\[\033[01;37m\]\t$sq_color]\342\224\200[\[\033[01;37m\]\u@\h$sq_color]\n\342\224\224\342\224\200\342\224\200> \[\033[01;37m\]\W$sq_color $ \[\033[01;37m\]>>\\[\\033[0m\\] "
 #unset sq_color
 
 # http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04
 #PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)\[\033[1;37m\])\342\224\200(\$(if [[ \$? == 0 ]]; then echo \"\[\033[01;32m\]\342\234\223\"; else echo \"\[\033[01;31m\]\342\234\227\"; fi)\[\033[1;37m\])\342\224\200(\[\033[1;34m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
 
+#PS1="(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]) \[\033[0m\]"
+
 # http://maketecheasier.com/8-useful-and-interesting-bash-prompts/2009/09/04
-PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)\[\033[1;37m\])\$([[ \$? != 0 ]] && echo \"\342\224\200(\[\033[0;31m\]\342\234\227\[\033[1;37m\])\")\342\224\200(\[\033[1;34m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
+#PS1="\n\[\033[1;37m\]\342\224\214($(if [[ ${EUID} == 0 ]]; then echo '\[\033[01;31m\]\h'; else echo '\[\033[01;34m\]\u@\h'; fi)\[\033[1;37m\])\$([[ \$? != 0 ]] && echo \"\342\224\200(\[\033[0;31m\]\342\234\227\[\033[1;37m\])\")\342\224\200(\[\033[1;34m\]\@ \d\[\033[1;37m\])\[\033[1;37m\]\n\342\224\224\342\224\200(\[\033[1;32m\]\w\[\033[1;37m\])\342\224\200(\[\033[1;32m\]\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\])\342\224\200> \[\033[0m\]"
 
 export OMP_NUM_THREADS=1
 
@@ -127,7 +138,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.5.2-Release-MPI-PETSc-Python
+    module load preCICE/1.6.0-Release-MPI-PETSc-Python
 
     module load CoDiPack/1.7
     module load Togl/1.7
@@ -145,12 +156,44 @@ case $HOSTNAME in
     . /opt/openfoam5/etc/bashrc
     # JabRef
   ;;
-
+  (sgscl*)
+    echo "Loading conda paths"
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/scratch-nfs/jaustar/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+    else
+      if [ -f "/scratch-nfs/jaustar/miniconda/etc/profile.d/conda.sh" ]; then
+          . "/scratch-nfs/jaustar/miniconda/etc/profile.d/conda.sh"
+      else
+          export PATH="/scratch-nfs/jaustar/miniconda/bin:$PATH"
+      fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+  ;;
+  (helium)
+  
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+    else
+      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
+          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
+      else
+          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
+      fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+  ;;
   (*) 
     export CODIPACKDIR=/opt/CoDiPack
     #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
-    export CODIPACKDIR=/opt/CoDiPack
     case ${HOSTNAME} in
     (archpc)
       export PETSC_DIR=/opt/petsc-3.11.4-opt
@@ -183,4 +226,6 @@ esac
 #if [ "$COLORTERM" == "xfce4-terminal" ] ; then
 #    export TERM=xterm-256color
 #fi
+
+
 

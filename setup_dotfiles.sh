@@ -33,13 +33,18 @@ done
 deploy_config_files () {
   echo "Deploy config files in .config/"
   d=$1
-  configfiles=$2
+  shift
+  echo "$@"
+  configfiles=("$@")
+  
+  echo "${configfiles[@]}"
+  echo "${configfiles}"
   for configfile in "${configfiles[@]}";do
-		if [[ -f "${dir}/${d}${configfile}" ]]; then
   		echo "Creating symlink for .config/${configfile}"
-  		rm -f "${HOME}/.config/${configfile}"
+			if [[ -f "${dir}/${d}${configfile}" ]]; then
+    		rm -f "${HOME}/.config/${configfile}"
+  		fi
   		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"		
-		fi
   done
 }
 
@@ -81,6 +86,6 @@ echo "Set appendname to ${appendname}"
 
 deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent}"
 
-platform_config_files=("rdiff-exclude")
-deploy_config_files "${appendname}" "${platform_config_files}"
+platform_config_files=("rdiff-exclude rdiff-include")
+deploy_config_files "${appendname}" ${platform_config_files[@]}
 
