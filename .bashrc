@@ -24,6 +24,13 @@ fi
 if [[ -f /usr/local.nfs/rc/bashrc ]]; then
   source /usr/local.nfs/rc/bashrc
 fi
+
+# needed for arch
+if [[ -d /usr/share/git/completion/ ]]; then
+  source /usr/share/git/completion/git-completion.bash
+  source /usr/share/git/completion/git-prompt.sh
+fi
+
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
@@ -49,6 +56,7 @@ case $HOSTNAME in
     export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
   (*)
+    export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
 esac 
 
@@ -64,22 +72,24 @@ export HISTFILESIZE=1000
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
-#if [[ ! -z "${DESKTOP_SESSION}" ]];then
+if [[ ! -z "${DESKTOP_SESSION}" ]];then
     #eval $(gnome-keyring-daemon --start)
 #    echo "Starting gnome keyring as we are running a desktop session"
 #    echo "Value of DESKTOP_SESSION ${DESKTOP_SESSION}"
 #    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
 #    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 #    dbus-update-activation-environment --systemd DISPLAY
+    eval $(gnome-keyring-daemon --start)
+    export SSH_AUTH_SOCK
     #export SSH_AUTH_SOCK
 #  echo "Don't do anything about the ssh keys"
 #if [[ ! -z "${DESKTOP_SESSION}" ]];then
 #    echo "Starting gnome keyring as we are running a desktop session"
 #    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
 #else
-if [ -n "$DESKTOP_SESSION" ];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
+#if [ -n "$DESKTOP_SESSION" ];then
+#    eval $(gnome-keyring-daemon --start)
+#    export SSH_AUTH_SOCK
 else
 #Start ssh-agent
 	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -203,18 +213,18 @@ case $HOSTNAME in
       # added by Miniconda3 4.5.12 installer
       # >>> conda init >>>
       # !! Contents within this block are managed by 'conda init' !!
-      __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/alex/software/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
-      if [ $? -eq 0 ]; then
-          \eval "$__conda_setup"
-      else
-          if [ -f "/home/alex/software/miniconda3/etc/profile.d/conda.sh" ]; then
-              . "/home/alex/software/miniconda3/etc/profile.d/conda.sh"
-              CONDA_CHANGEPS1=false conda activate base
-          else
-              \export PATH="/home/alex/software/miniconda3/bin:$PATH"
-          fi
-      fi
-      unset __conda_setup
+#      __conda_setup="$(CONDA_REPORT_ERRORS=false '/home/alex/software/miniconda3/bin/conda' shell.bash hook 2> /dev/null)"
+#      if [ $? -eq 0 ]; then
+#          \eval "$__conda_setup"
+#      else
+#          if [ -f "/home/alex/software/miniconda3/etc/profile.d/conda.sh" ]; then
+#              . "/home/alex/software/miniconda3/etc/profile.d/conda.sh"
+#              CONDA_CHANGEPS1=false conda activate base
+#          else
+#              \export PATH="/home/alex/software/miniconda3/bin:$PATH"
+#          fi
+#      fi
+#      unset __conda_setup
       # <<< conda init <<<
       ;;
     (*)
