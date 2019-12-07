@@ -44,7 +44,8 @@ set t_Co=256
 
 " set color scheme
 " :colorscheme wombat
-:colorscheme desert
+" :colorscheme desert
+:colorscheme sublimemonokai
 syntax enable
 ":let g:solarized_termcolors=256
 ":set background=dark
