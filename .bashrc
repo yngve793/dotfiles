@@ -31,6 +31,9 @@ if [[ -d /usr/share/git/completion/ ]]; then
   source /usr/share/git/completion/git-prompt.sh
 fi
 
+
+export PATH=${PATH}:~/bin
+export PATH=${PATH}:~/bin/"${HOSTNAME}"
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
@@ -152,9 +155,15 @@ case $HOSTNAME in
 
     module load CoDiPack/1.7
     module load Togl/1.7
-    module load NGSolve/5.0.0-opt
+#    module load NGSolve/5.0.0-opt
 
     module load pdfsam
+
+    # Go and singularity
+    export GOPATH=${HOME}/go
+    export PATH=$PATH:/usr/local/go/bin:${GOPATH}/bin
+    export PATH=/usr/local/singularity/bin/:${PATH}
+    . /usr/local/etc/bash_completion.d/singularity
 
     # Calculix adapter
     export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
@@ -184,20 +193,21 @@ case $HOSTNAME in
     # <<< conda initialize <<<
   ;;
   (helium)
-  
+  export SPACK_ROOT=/data/scratch/jaustar/software/spack  
+  . $SPACK_ROOT/share/spack/setup-env.sh
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-    else
-      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
-          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
-      else
-          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
-      fi
-    fi
-    unset __conda_setup
+#  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#    if [ $? -eq 0 ]; then
+#      eval "$__conda_setup"
+#    else
+#      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
+#          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
+#      else
+#          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
+#      fi
+#    fi
+#    unset __conda_setup
     # <<< conda initialize <<<
   ;;
   (*) 
