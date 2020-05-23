@@ -5,13 +5,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-#if [ -d /etc/profile.d ]; then
-#  for i in /etc/profile.d/*.sh; do
-#    if [ -r $i ]; then
-#      . $i
-#    fi
-#  done
-#fi
+if [ -d /etc/profile.d ]; then
+  for i in /etc/profile.d/*.sh; do
+    if [ -r $i ]; then
+      . $i
+    fi
+  done
+fi
 
 if [[ -f ~/.bash_aliases ]]; then
   source ~/.bash_aliases
@@ -39,6 +39,7 @@ fi
 
 export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/bin:${PATH}
+export PATH=${PATH}:~/bin/"${HOSTNAME}"
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
@@ -164,6 +165,12 @@ case $HOSTNAME in
 
     module load pdfsam
 
+    # Go and singularity
+    export GOPATH=${HOME}/go
+    export PATH=$PATH:/usr/local/go/bin:${GOPATH}/bin
+    export PATH=/usr/local/singularity/bin/:${PATH}
+    . /usr/local/etc/bash_completion.d/singularity
+
     # Calculix adapter
     export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
     # yaml for calculix adapter
@@ -192,20 +199,21 @@ case $HOSTNAME in
     # <<< conda initialize <<<
   ;;
   (helium)
-  
+  export SPACK_ROOT=/data/scratch/jaustar/software/spack  
+  . $SPACK_ROOT/share/spack/setup-env.sh
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!
-  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-      eval "$__conda_setup"
-    else
-      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
-          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
-      else
-          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
-      fi
-    fi
-    unset __conda_setup
+#  __conda_setup="$('/data/scratch/jaustar/software/miniconda/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#    if [ $? -eq 0 ]; then
+#      eval "$__conda_setup"
+#    else
+#      if [ -f "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh" ]; then
+#          . "/data/scratch/jaustar/software/miniconda/etc/profile.d/conda.sh"
+#      else
+#          export PATH="/data/scratch/jaustar/software/miniconda/bin:$PATH"
+#      fi
+#    fi
+#    unset __conda_setup
     # <<< conda initialize <<<
   ;;
   (*) 

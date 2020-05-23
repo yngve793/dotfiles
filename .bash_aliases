@@ -16,7 +16,8 @@ alias tree="tree -C"
 
 case $HOSTNAME in
   (lapsgs24)
-    alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
+    #alias jabref="/usr/lib/jvm/java-1.8.0-openjdk-amd64/bin/java -jar /home/jaustar/software/jabref/JabRef-4.3.1.jar"
+    alias jabref="/home/jaustar/software/jabref/JabRef/bin/JabRef"
     alias qtcreator="/home/jaustar/software/qtcreator-4.10.1/bin/qtcreator.sh"
   ;;
   (*)

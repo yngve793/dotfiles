@@ -58,5 +58,8 @@ syntax enable
 :set ignorecase
 :set smartcase
 
+" enable vim airline
+let g:airline#extensions#tabline#enabled = 1
+
 " fonts
 let g:airline_powerline_fonts = 1
