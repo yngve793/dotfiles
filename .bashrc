@@ -5,13 +5,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -d /etc/profile.d ]; then
-  for i in /etc/profile.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
-fi
+#if [ -d /etc/profile.d ]; then
+#  for i in /etc/profile.d/*.sh; do
+#    if [ -r $i ]; then
+#      . $i
+#    fi
+#  done
+#fi
 
 if [[ -f ~/.bash_aliases ]]; then
   source ~/.bash_aliases
@@ -31,6 +31,14 @@ if [[ -d /usr/share/git/completion/ ]]; then
   source /usr/share/git/completion/git-prompt.sh
 fi
 
+# fzf
+if [[ -d /usr/share/fzf/ ]]; then
+  source /usr/share/fzf/completion.bash
+  source /usr/share/fzf/key-bindings.bash
+fi
+
+export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/bin:${PATH}
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
   (lapsgs24) 
@@ -206,10 +214,14 @@ case $HOSTNAME in
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
     case ${HOSTNAME} in
     (archpc)
+      source /etc/profile.d/modules.sh
+      export MODULEPATH=/opt/modulefiles:${MODULEPATH}
       export PETSC_DIR=/opt/petsc-3.11.4-opt
-      export NETGENDIR=/opt/netgen-5.0.0-opt/bin
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib:"${NETGENDIR}/../lib"
-      export PATH=$PATH:"${NETGENDIR}"
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib
+      module load netgen/5.0.0-opt
+#      export NETGENDIR=/opt/netgen-5.0.0-opt/bin
+#      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib:"${NETGENDIR}/../lib"
+#      export PATH=$PATH:"${NETGENDIR}"
       # added by Miniconda3 4.5.12 installer
       # >>> conda init >>>
       # !! Contents within this block are managed by 'conda init' !!

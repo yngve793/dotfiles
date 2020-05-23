@@ -57,3 +57,6 @@ syntax enable
 " Search ignores case if only lower case letters are used
 :set ignorecase
 :set smartcase
+
+" fonts
+let g:airline_powerline_fonts = 1
