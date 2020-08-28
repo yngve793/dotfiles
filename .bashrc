@@ -19,7 +19,7 @@ if [[ -f /etc/bash.bashrc ]]; then
 	source /etc/bash.bashrc
 fi
 if [[ -f /usr/local.nfs/rc/bashrc ]]; then
-  echo "Sourcing special bashrc"
+#  echo "Sourcing special bashrc"
   source /usr/local.nfs/rc/bashrc
 fi
 
@@ -29,9 +29,18 @@ if [[ -d /usr/share/git/completion/ ]]; then
   source /usr/share/git/completion/git-prompt.sh
 fi
 
-export PATH=${HOME}/bin:${PATH}
-export PATH="${HOME}/bin/git-annex.linux":${PATH}
+# fzf
+if [[ -d /usr/share/fzf/ ]]; then
+  source /usr/share/fzf/completion.bash
+  source /usr/share/fzf/key-bindings.bash
+fi
 
+export PATH=${HOME}/.local/bin:${PATH}
+export PATH=${HOME}/bin:${PATH}
+if [[ -d ${HOME}/bin/git-annex.linux ]]; then
+  export PATH="${HOME}/bin/git-annex.linux":${PATH}
+fi
+export PATH=${PATH}:~/bin/"${HOSTNAME}"
 
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
@@ -158,6 +167,12 @@ case $HOSTNAME in
 
     module load pdfsam
 
+    # Go and singularity
+    export GOPATH=${HOME}/go
+    export PATH=$PATH:/usr/local/go/bin:${GOPATH}/bin
+    export PATH=/usr/local/singularity/bin/:${PATH}
+    . /usr/local/etc/bash_completion.d/singularity
+
     # Calculix adapter
     export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
     # yaml for calculix adapter
@@ -226,7 +241,7 @@ case $HOSTNAME in
 
 #    module load gcc-9.2.0 boost-1.72.0-gcc-9.2.0-qt2uz5a cmake-3.16.2-gcc-9.2.0-p7bn2rm eigen-3.3.7-gcc-9.2.0-zz3jboq hdf5-1.10.6-gcc-9.2.0-dg3dgwq hypre-2.18.2-gcc-9.2.0-5tmxvkd libxml2-2.9.9-gcc-9.2.0-kxifw4y metis-5.1.0-gcc-9.2.0-iyx6a25 openblas-0.3.7-gcc-9.2.0-aw6aebh openmpi-3.1.5-gcc-9.2.0-q5igqm3 parmetis-4.0.3-gcc-9.2.0-nrateej petsc-3.12.3-gcc-9.2.0-s7c565z precice-1.6.1-gcc-9.2.0-sdgxbmq py-numpy-1.18.1-gcc-9.2.0-yutave2 py-ply-3.11-gcc-9.2.0-pjdqlj4 python-3.7.6-gcc-9.2.0-kek67k7 superlu-dist-6.1.1-gcc-9.2.0-2o7s2ly zlib-1.2.11-gcc-9.2.0-myrpqhu
 
-    source /data/scratch/jaustar/software/fenics/dolfin-install/share/dolfin/dolfin.conf
+    #source /data/scratch/jaustar/software/fenics/dolfin-install/share/dolfin/dolfin.conf
   ;;
   (argon-*)
     export SPACK_ROOT=/home/jaustar/software/spack 
@@ -248,10 +263,14 @@ case $HOSTNAME in
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
     case ${HOSTNAME} in
     (archpc)
+      source /etc/profile.d/modules.sh
+      export MODULEPATH=/opt/modulefiles:${MODULEPATH}
       export PETSC_DIR=/opt/petsc-3.11.4-opt
-      export NETGENDIR=/opt/netgen-5.0.0-opt/bin
-      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib:"${NETGENDIR}/../lib"
-      export PATH=$PATH:"${NETGENDIR}"
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib
+      module load netgen/5.0.0-opt
+#      export NETGENDIR=/opt/netgen-5.0.0-opt/bin
+#      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib:"${NETGENDIR}/../lib"
+#      export PATH=$PATH:"${NETGENDIR}"
       # added by Miniconda3 4.5.12 installer
       # >>> conda init >>>
       # !! Contents within this block are managed by 'conda init' !!

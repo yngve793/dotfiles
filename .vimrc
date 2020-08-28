@@ -57,3 +57,9 @@ syntax enable
 " Search ignores case if only lower case letters are used
 :set ignorecase
 :set smartcase
+
+" enable vim airline
+let g:airline#extensions#tabline#enabled = 1
+
+" fonts
+let g:airline_powerline_fonts = 1
