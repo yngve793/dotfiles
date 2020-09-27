@@ -5,13 +5,18 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-if [ -d /etc/profile.d ]; then
-  for i in /etc/profile.d/*.sh; do
-    if [ -r $i ]; then
-      . $i
-    fi
-  done
-fi
+# Source standard profile
+#if [[ -f /etc/profile ]]; then
+#	. /etc/profile
+#fi
+#
+#if [ -d /etc/profile.d ]; then
+#  for i in /etc/profile.d/*.sh; do
+#    if [ -r $i ]; then
+#      . $i
+#    fi
+#  done
+#fi
 
 
 # Source standard bashrc
@@ -264,6 +269,9 @@ case $HOSTNAME in
     case ${HOSTNAME} in
     (archpc)
       source /etc/profile.d/modules.sh
+      #Spack
+      export SPACK_ROOT=${HOME}/software/spack
+      . $SPACK_ROOT/share/spack/setup-env.sh
       export MODULEPATH=/opt/modulefiles:${MODULEPATH}
       export PETSC_DIR=/opt/petsc-3.11.4-opt
       export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib
