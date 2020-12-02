@@ -293,6 +293,7 @@ bindsym --release Mod1+Print exec scrot -s -e 'mv $f /tmp/ && gimp /tmp/$f'
 # Set background image
 #exec --no-startup-id feh --bg-scale /home/alex/Images/background/HST_TRY3.png
 #exec --no-startup-id feh --bg-max /home/alex/Images/Signal-Iduna-Park-Dortmund-night-lights_1920x1080.jpg
+exec --no-startup-id nitrogen --restore
 # Turn off display after some time (in seconds)
 exec --no-startup-id xset dpms 900
 # Activate german keyboard layout
@@ -307,7 +308,10 @@ exec --no-startup-id dunst
 #
 exec --no-startup-id ~/.screenlayout/main_only.sh
 #
+#exec --no-startup-id xrandr --dpi 120
 exec --no-startup-id xrandr --dpi 96
 
-# Nextcloud cliend
+# Nextcloud client
 exec --no-startup-id nextcloud 
+
+exec --no-startup-id syncthing-gtk -m 

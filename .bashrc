@@ -169,6 +169,7 @@ case $HOSTNAME in
     module load CoDiPack/1.7
     module load Togl/1.7
     module load NGSolve/5.0.0-opt
+    #module load spack
 
     module load pdfsam
 
@@ -179,13 +180,13 @@ case $HOSTNAME in
     . /usr/local/etc/bash_completion.d/singularity
 
     # Calculix adapter
-    export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
+    #export PATH=/home/jaustar/software/calculix-adapter-master/bin/:${PATH}
     # yaml for calculix adapter
-    export LD_LIBRARY_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/build:${LD_LIBRARY_PATH}
-    export CPLUS_INCLUDE_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/include:${CPLUS_INCLUDE_PATH}
+    #export LD_LIBRARY_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/build:${LD_LIBRARY_PATH}
+    #export CPLUS_INCLUDE_PATH=/home/jaustar/software/yaml-cpp-yaml-cpp-0.6.2/include:${CPLUS_INCLUDE_PATH}
 
     # OpenFOAM
-    . /opt/openfoam5/etc/bashrc
+    #. /opt/openfoam5/etc/bashrc
     # JabRef
   ;;
   (sgscl*)
@@ -307,6 +308,54 @@ esac
 #fi
 
 
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+extend_dune_control_path(){
+#  echo "$#"
+  echo "OLD DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
+  path_to_add=${PWD}
+  if [ "$#" -ge 1 ]; then
+    if [[ "${1}" == "--help" || "${1}" == "-h" ]]; then
+      echo "extend_dune_control_path PATH_TO_ADD PATH_TO_ADD"
+      echo ""
+      echo "If PATH_TO_ADD is not specified the current working directory is added"
+      return 0
+    else
+  #    IFS=":"
+  #    path_to_add="${*}"
+      path_to_add=""
+      for path in "$@"
+      do
+        if [[ "${path}" == /* ]]; then
+          if [[ "${path_to_add}" == "" || "${DUNE_CONTROL_PATH}" == :*  ]]; then
+            path_to_add="${path}"
+          else
+            path_to_add="${path}:${path_to_add}"
+          fi
+        else
+          path_to_add="${PWD}/${path}:${path_to_add}"
+        fi
+      done
+      echo "${path_to_add}"
+    fi
+  fi
+  export DUNE_CONTROL_PATH="${path_to_add}""${DUNE_CONTROL_PATH}"
+
+#  if [ -z "${DUNE_CONTROL_PATH}" ]; then
+#    export DUNE_CONTROL_PATH="${path_to_add}"
+#  else
+#    export DUNE_CONTROL_PATH="${path_to_add}":"${DUNE_CONTROL_PATH}"
+#  fi
+  echo "NEW DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
+  return 0
+}
+
+show_dune_control_path(){
+  echo "DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
+  return 0
+}
 
 if [[ -f ~/.bash_aliases ]]; then
   source ~/.bash_aliases
