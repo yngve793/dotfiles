@@ -59,7 +59,33 @@ syntax enable
 :set smartcase
 
 " enable vim airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 
-" fonts
-let g:airline_powerline_fonts = 1
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+"
+"" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+"let g:UltiSnipsExpandTrigger = "<nop>"
+"let g:ulti_expand_or_jump_res = 0
+"function ExpandSnippetOrCarriageReturn()
+"    let snippet = UltiSnips#ExpandSnippetOrJump()
+"    if g:ulti_expand_or_jump_res > 0
+"        return snippet
+"    else
+"        return "\<CR>"
+"    endif
+"endfunction
+"inoremap <expr> <CR> pumvisible() ? "\<C-R>=ExpandSnippetOrCarriageReturn()\<CR>" : "\<CR>"
+"
+"g:UltiSnipsExpandTrigger = "<return>"
+
+" g:UltiSnipsJumpForwardTrigger
+" g:UltiSnipsJumpBackwardTrigger
