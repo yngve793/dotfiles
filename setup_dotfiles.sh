@@ -86,6 +86,9 @@ echo "Set appendname to ${appendname}"
 
 deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent}"
 
-platform_config_files=("rdiff-exclude rdiff-include")
+platform_config_files=()
+case $HOSTNAME in
+  (lapsgs24) platform_config_files=("rdiff-exclude" "rdiff-include");;
+esac
 deploy_config_files "${appendname}" ${platform_config_files[@]}
 
