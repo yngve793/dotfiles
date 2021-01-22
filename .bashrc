@@ -314,7 +314,7 @@ esac
 
 extend_dune_control_path(){
 #  echo "$#"
-  echo "OLD DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
+#  echo "OLD DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
   path_to_add=${PWD}
   if [ "$#" -ge 1 ]; then
     if [[ "${1}" == "--help" || "${1}" == "-h" ]]; then
