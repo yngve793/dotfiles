@@ -315,3 +315,5 @@ exec --no-startup-id xrandr --dpi 96
 exec --no-startup-id nextcloud 
 
 exec --no-startup-id syncthing-gtk -m 
+
+exec --no-startup-id singularity instance start /home/jaustar/singularity_forge/texlive/ubuntu-20.04-texlive.sif texlive
