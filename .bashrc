@@ -6,10 +6,10 @@
 [[ $- != *i* ]] && return
 
 # Source standard profile
-#if [[ -f /etc/profile ]]; then
-#	. /etc/profile
-#fi
-#
+if [[ -f /etc/profile ]]; then
+	. /etc/profile
+fi
+
 #if [ -d /etc/profile.d ]; then
 #  for i in /etc/profile.d/*.sh; do
 #    if [ -r $i ]; then
