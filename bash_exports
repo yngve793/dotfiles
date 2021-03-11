@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Keep 1000 lines in .bash_history (default is 500)
-export HISTSIZE=1000
+export HISTSIZE=5000
 export HIST
 export OMP_NUM_THREADS=1
 export EDITOR=vim
