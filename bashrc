@@ -6,9 +6,9 @@
 [[ $- != *i* ]] && return
 
 # Source standard profile
-if [[ -f /etc/profile ]]; then
-	. /etc/profile
-fi
+#if [[ -f /etc/profile ]]; then
+#	. /etc/profile
+#fi
 
 #if [ -d /etc/profile.d ]; then
 #  for i in /etc/profile.d/*.sh; do
@@ -20,25 +20,35 @@ fi
 
 
 # Source standard bashrc
-if [[ -f /etc/bash.bashrc ]]; then
-	source /etc/bash.bashrc
-fi
-if [[ -f /usr/local.nfs/rc/bashrc ]]; then
-#  echo "Sourcing special bashrc"
-  source /usr/local.nfs/rc/bashrc
-fi
+#if [[ -f /etc/bash.bashrc ]]; then
+#	source /etc/bash.bashrc
+#fi
+#if [[ -f /usr/local.nfs/rc/bashrc ]]; then
+##  echo "Sourcing special bashrc"
+#  source /usr/local.nfs/rc/bashrc
+#fi
 
 # needed for arch
-if [[ -d /usr/share/git/completion/ ]]; then
-  source /usr/share/git/completion/git-completion.bash
-  source /usr/share/git/completion/git-prompt.sh
-fi
+#if [[ -d /usr/share/git/completion/ ]]; then
+  #source /usr/share/git/completion/git-completion.bash
+#  source /usr/share/git/completion/git-prompt.sh
+#fi
 
 # fzf
-if [[ -d /usr/share/fzf/ ]]; then
-  source /usr/share/fzf/completion.bash
-  source /usr/share/fzf/key-bindings.bash
-fi
+#if [[ -d /usr/share/fzf/ ]]; then
+#  source /usr/share/fzf/completion.bash
+#  source /usr/share/fzf/key-bindings.bash
+#fi
+
+
+for file in /etc/profile ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-* /usr/local.nfs/rc/bashrc
+do
+    if [[ -f "$file" ]]
+    then
+        source "$file"
+    fi
+done
+
 
 export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/bin:${PATH}
@@ -49,7 +59,7 @@ export PATH=${PATH}:~/bin/"${HOSTNAME}"
 
 case $HOSTNAME in
   (CRD-L-05716) source /etc/bash.bashrc;;
-  (lapsgs24) 
+  (lapsgs24)
 #    source /etc/profile.d/lmod.sh
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
@@ -60,12 +70,12 @@ case $HOSTNAME in
     #module load preCICE/1.6.0-opt
     #module load cmake/3.12.1
     ;;
-  (*) 
+  (*)
 	;;
 esac
 
 case $HOSTNAME in
-  (lapsgs24) 
+  (lapsgs24)
     export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
   (neon | helium | sgscl* | kepler | vgpu | argon* )
@@ -74,7 +84,7 @@ case $HOSTNAME in
   (*)
     export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
-esac 
+esac
 
 
 
@@ -127,7 +137,7 @@ alias ls='ls --color=auto'
 #PS2='>'
 #if [[ ${EUID} == 0 ]] ; then
 #		sq_color="\[\033[0;31m\]"
-#else		
+#else
 #	sq_color="\[\033[0;34m\]"
 #PS1="$sq_color\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[01;37m\]\342\234\227$sq_color]\342\224\200\")[\[\033[01;37m\]\t$sq_color]\342\224\200[\[\033[01;37m\]\u@\h$sq_color]\n\342\224\224\342\224\200\342\224\200> \[\033[01;37m\]\W$sq_color $ \[\033[01;37m\]>>\\[\\033[0m\\] "
 #unset sq_color
@@ -218,9 +228,9 @@ case $HOSTNAME in
   ;;
   (helium)
 #    export PATH="/home/jaustar/.local/bin":${PATH}
-   export SPACK_ROOT=/data/scratch/jaustar/software/spack 
+   export SPACK_ROOT=/data/scratch/jaustar/software/spack
    . $SPACK_ROOT/share/spack/setup-env.sh
-   
+
    #module load gcc-9.2.0
 #   module load cmake-3.16.2-gcc-9.2.0-ljlwrtm hdf5-1.10.6-gcc-9.2.0-bz7qlyl hypre-2.18.2-gcc-9.2.0-cnzymc5 libxml2-2.9.9-gcc-9.2.0-xkezdjp metis-5.1.0-gcc-9.2.0-c7abmhx openblas-0.3.7-gcc-9.2.0-5rpbwaz openmpi-3.1.5-gcc-9.2.0-4tcwjfk parmetis-4.0.3-gcc-9.2.0-qplagoc petsc-3.12.3-gcc-9.2.0-ymzqoeb pkg-config-0.29.2-gcc-9.2.0-trb2g2j py-cython-0.29.14-gcc-9.2.0-teashjw py-numpy-1.18.1-gcc-9.2.0-4dfpycp py-ply-3.11-gcc-9.2.0-yrzqe34 python-3.7.6-gcc-9.2.0-lium4ub superlu-dist-6.1.1-gcc-9.2.0-5brfmvi zlib-1.2.11-gcc-9.2.0-krudt66
    #module load boost-1.72.0-gcc-9.2.0-ndisizz precice-1.6.1-gcc-9.2.0-zdd5wkb
@@ -242,7 +252,7 @@ case $HOSTNAME in
     # <<< conda initialize <<<
   ;;
   (neon)
-    export SPACK_ROOT=/data/scratch/jaustar/software/spack 
+    export SPACK_ROOT=/data/scratch/jaustar/software/spack
     . $SPACK_ROOT/share/spack/setup-env.sh
 
 #    module load gcc-9.2.0 boost-1.72.0-gcc-9.2.0-qt2uz5a cmake-3.16.2-gcc-9.2.0-p7bn2rm eigen-3.3.7-gcc-9.2.0-zz3jboq hdf5-1.10.6-gcc-9.2.0-dg3dgwq hypre-2.18.2-gcc-9.2.0-5tmxvkd libxml2-2.9.9-gcc-9.2.0-kxifw4y metis-5.1.0-gcc-9.2.0-iyx6a25 openblas-0.3.7-gcc-9.2.0-aw6aebh openmpi-3.1.5-gcc-9.2.0-q5igqm3 parmetis-4.0.3-gcc-9.2.0-nrateej petsc-3.12.3-gcc-9.2.0-s7c565z precice-1.6.1-gcc-9.2.0-sdgxbmq py-numpy-1.18.1-gcc-9.2.0-yutave2 py-ply-3.11-gcc-9.2.0-pjdqlj4 python-3.7.6-gcc-9.2.0-kek67k7 superlu-dist-6.1.1-gcc-9.2.0-2o7s2ly zlib-1.2.11-gcc-9.2.0-myrpqhu
@@ -250,7 +260,7 @@ case $HOSTNAME in
     #source /data/scratch/jaustar/software/fenics/dolfin-install/share/dolfin/dolfin.conf
   ;;
   (argon-*)
-    export SPACK_ROOT=/home/jaustar/software/spack 
+    export SPACK_ROOT=/home/jaustar/software/spack
     . $SPACK_ROOT/share/spack/setup-env.sh
 
     module load gcc-9.2.0
@@ -263,7 +273,7 @@ case $HOSTNAME in
         ;;
     esac
   ;;
-  (*) 
+  (*)
     export CODIPACKDIR=/opt/CoDiPack
     #export DISTCC_HOSTS="deepthought/5,lzo,cpp archpc/9,lzo,cpp"
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
@@ -310,53 +320,10 @@ esac
 
 
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-extend_dune_control_path(){
-#  echo "$#"
-#  echo "OLD DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
-  path_to_add=${PWD}
-  if [ "$#" -ge 1 ]; then
-    if [[ "${1}" == "--help" || "${1}" == "-h" ]]; then
-      echo "extend_dune_control_path PATH_TO_ADD PATH_TO_ADD"
-      echo ""
-      echo "If PATH_TO_ADD is not specified the current working directory is added"
-      return 0
-    else
-  #    IFS=":"
-  #    path_to_add="${*}"
-      path_to_add=""
-      for path in "$@"
-      do
-        if [[ "${path}" == /* ]]; then
-          if [[ "${path_to_add}" == "" || "${DUNE_CONTROL_PATH}" == :*  ]]; then
-            path_to_add="${path}"
-          else
-            path_to_add="${path}:${path_to_add}"
-          fi
-        else
-          path_to_add="${PWD}/${path}:${path_to_add}"
-        fi
-      done
-      echo "${path_to_add}"
-    fi
-  fi
-  export DUNE_CONTROL_PATH="${path_to_add}""${DUNE_CONTROL_PATH}"
 
-#  if [ -z "${DUNE_CONTROL_PATH}" ]; then
-#    export DUNE_CONTROL_PATH="${path_to_add}"
-#  else
-#    export DUNE_CONTROL_PATH="${path_to_add}":"${DUNE_CONTROL_PATH}"
-#  fi
-  echo "NEW DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
-  return 0
-}
 
-show_dune_control_path(){
-  echo "DUNE_CONTROL_PATH=${DUNE_CONTROL_PATH}"
-  return 0
-}
-
-if [[ -f ~/.bash_aliases ]]; then
-  source ~/.bash_aliases
-fi
+#if [[ -f ~/.bash_aliases ]]; then
+#  source ~/.bash_aliases
+#fi

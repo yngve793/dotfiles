@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=(".gitignore_global" ".gitconfig" ".emacs" ".bashrc" ".vimrc" ".tmux.conf" ".bash_aliases")
+dotfiles=("gitignore_global" "gitconfig" "emacs" "bashrc" "vimrc" "tmux.conf" "bash_aliases" "bash_function")
 dir="${HOME}/dotfiles"
 
 # Check if there is an update in my repository
@@ -15,11 +15,11 @@ echo "Set dir to ${dir}"
 
 for dotfile in "${dotfiles[@]}";do
 
-    if [[ -f "${dir}/${dotfile}" ]]; then 
+    if [[ -f "${dir}/${dotfile}" ]]; then
 		  echo "Creating symlink for ${dotfile}"
   #  echo  "${HOME}/${dotfile}"
   #  echo "${dir}/${dotfile}"
-		  ln -sf "${dir}/${dotfile}" "${HOME}/${dotfile}"
+		  ln -sf "${dir}/${dotfile}" "${HOME}/.${dotfile}"
 
 		  case ${dotfile} in
 		    (.vimrc)	rm -rf "${HOME}/.vim"
@@ -36,7 +36,7 @@ deploy_config_files () {
   shift
   echo "$@"
   configfiles=("$@")
-  
+
   echo "${configfiles[@]}"
   echo "${configfiles}"
   for configfile in "${configfiles[@]}";do
@@ -44,7 +44,7 @@ deploy_config_files () {
 			if [[ -f "${dir}/${d}${configfile}" ]]; then
     		rm -f "${HOME}/.config/${configfile}"
   		fi
-  		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"		
+  		ln -sf "${dir}/${d}${configfile}" "${HOME}/.config/${configfile}"
   done
 }
 
@@ -57,7 +57,7 @@ deploy_configs_dirs () {
     if [[ -d "${dir}/${appendname}${dotconfdir}" ]]; then
 		  echo "Creating symlink for .config/${dotconfdir}"
 		  rm -rf "${HOME}/.config/${dotconfdir}"
-		  ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"		
+		  ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"
 		fi
   done
 }
@@ -66,7 +66,7 @@ deploy_configs_dirs () {
 general_config_files=("")
 deploy_config_files "${config_files}"
 
-# System-independent 
+# System-independent
 dotconfdirsSystemIndependent=("dunst")
 # Deploy
 deploy_configs_dirs "" "${dotconfdirsSystemIndependent}"
