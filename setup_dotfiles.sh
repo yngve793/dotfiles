@@ -29,10 +29,6 @@ for dotfile in "${dotfiles[@]}";do
 		fi
 done
 
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
 
 deploy_config_files () {
   echo "Deploy config files in .config/"
