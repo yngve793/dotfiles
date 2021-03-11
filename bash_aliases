@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 alias rm="rm -i"
 alias grep="grep --color"
 alias ls='ls --color=auto'

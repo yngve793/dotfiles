@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dotfiles=("gitignore_global" "gitconfig" "emacs" "bashrc" "vimrc" "tmux.conf" "bash_aliases" "bash_functions")
+dotfiles=("gitignore_global" "gitconfig" "emacs" "bashrc" "vimrc" "tmux.conf" "bash_aliases" "bash_functions" "bash_exports")
 dir="${HOME}/dotfiles"
 
 # Check if there is an update in my repository
@@ -28,6 +28,10 @@ for dotfile in "${dotfiles[@]}";do
 		  esac
 		fi
 done
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+#    . /etc/bash_completion
+#fi
 
 
 deploy_config_files () {
