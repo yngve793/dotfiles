@@ -41,7 +41,7 @@
 #fi
 
 
-for file in /etc/profile ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-* /usr/local.nfs/rc/bashrc
+for file in /etc/profile ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-* /usr/local.nfs/rc/bashrc ${HOME}/.cargo/env
 do
     if [[ -f "$file" ]]
     then
