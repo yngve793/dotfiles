@@ -6,6 +6,8 @@
 	excludesfile = ~/.gitignore_global
 [diff]
   tool = meld
+[merge]
+  tool = kdiff3
 [push]
   default = simple
 [pull]
