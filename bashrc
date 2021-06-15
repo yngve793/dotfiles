@@ -62,7 +62,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.6.0-Release-MPI-PETSc-Python
+    module load preCICE
 
     module load CoDiPack/1.7
     module load Togl/1.7
