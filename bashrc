@@ -90,7 +90,7 @@ case $HOSTNAME in
   (sgscl*)
 #    if [ -z ${SPACK_ROOT+x}]; then
       echo "Loading Spack environment"
-      SPACK_ROOT="${HOME}/software/sgscl/spack/"
+      export SPACK_ROOT=/scratch-nfs/jaustar/software/spack
       . ${SPACK_ROOT}/share/spack/setup-env.sh
 #    fi
     #SPACK_ROOT=/scratch-nfs/jaustar/software/spack/
@@ -148,14 +148,14 @@ case $HOSTNAME in
     #source /data/scratch/jaustar/software/fenics/dolfin-install/share/dolfin/dolfin.conf
   ;;
   (argon-*)
-    export SPACK_ROOT=/home/jaustar/software/spack
+    export SPACK_ROOT="/data/scratch/jaustar/software/spack"
     . $SPACK_ROOT/share/spack/setup-env.sh
 
-    module load gcc-9.2.0
+#    module load gcc-9.2.0
     case $HOSTNAME in
       (argon-epyc)
-        echo "Importing dolfin"
-        source /home/jaustar/software/epyc/fenics/dolfin/build/home/jaustar/software/epyc/fenics/dolfin-install/share/dolfin/dolfin.conf
+#        echo "Importing dolfin"
+#        source /home/jaustar/software/epyc/fenics/dolfin/build/home/jaustar/software/epyc/fenics/dolfin-install/share/dolfin/dolfin.conf
         ;;
       (*)
         ;;
