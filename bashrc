@@ -41,7 +41,7 @@
 #fi
 
 
-for file in /etc/profile ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} /usr/local.nfs/rc/bashrc ${HOME}/.cargo/env  ${HOME}/bin/git-annex.linux/bash/git-completion.bash
+for file in /etc/profile /etc/bash.bashrc /usr/local.nfs/rc/bashrc ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} ${HOME}/.cargo/env  ${HOME}/bin/git-annex.linux/bash/git-completion.bash
 do
     if [[ -f "$file" ]]
     then
@@ -160,6 +160,13 @@ case $HOSTNAME in
       (*)
         ;;
     esac
+  ;;
+  (ipvs-epyc*)
+    #echo "Sourcing Spack FORK! (develop)"
+    #export SPACK_ROOT=/data/scratch/sgs/jaustar/spack-test
+    #export SPACK_ROOT=/data/scratch/sgs/jaustar/spack-fork
+    export SPACK_ROOT=/data/scratch/sgs/jaustar/spack
+    . $SPACK_ROOT/share/spack/setup-env.sh
   ;;
   (*)
     export CODIPACKDIR=/opt/CoDiPack
