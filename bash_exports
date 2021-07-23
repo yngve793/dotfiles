@@ -5,7 +5,7 @@ export HISTSIZE=5000
 export HIST
 export OMP_NUM_THREADS=1
 export EDITOR=vim
-FILESIZE=1000
+export FILESIZE=1000
 
 
 export PATH=${HOME}/.local/bin:${PATH}
