@@ -37,7 +37,7 @@ deploy_config_files () {
   echo "$@"
   configfiles=("$@")
 
-  echo "${configfiles[@]}"
+  echo "List of config files to deploy ${configfiles[@]}"
   echo "${configfiles}"
   for configfile in "${configfiles[@]}";do
   		echo "Creating symlink for .config/${configfile}"
@@ -52,12 +52,16 @@ deploy_config_files () {
 deploy_configs_dirs () {
   echo "Deploy directories in .config/"
   appendname=$1
-  dotconfdirs=$2
+  shift
+  dotconfdirs=("$@")
+  echo "List of config dirs to deploy ${dotconfdirs[@]}"
   for dotconfdir in "${dotconfdirs[@]}";do
     if [[ -d "${dir}/${appendname}${dotconfdir}" ]]; then
 		  echo "Creating symlink for .config/${dotconfdir}"
 		  rm -rf "${HOME}/.config/${dotconfdir}"
 		  ln -sf "${dir}/${appendname}${dotconfdir}" "${HOME}/.config/${dotconfdir}"
+    else
+      echo "Skipping config dir for .config/${dotconfdir} as it already exists."
 		fi
   done
 }
@@ -67,9 +71,9 @@ general_config_files=("")
 deploy_config_files "${config_files}"
 
 # System-independent
-dotconfdirsSystemIndependent=("dunst")
+dotconfdirsSystemIndependent=("dunst" "swaywm")
 # Deploy
-deploy_configs_dirs "" "${dotconfdirsSystemIndependent}"
+deploy_configs_dirs "" "${dotconfdirsSystemIndependent[@]}"
 
 # System-dependent
 dotconfdirsSystemDependent=("i3")
@@ -84,7 +88,7 @@ case $HOSTNAME in
 esac
 echo "Set appendname to ${appendname}"
 
-deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent}"
+deploy_configs_dirs "${appendname}" "${dotconfdirsSystemDependent[@]}"
 
 platform_config_files=()
 case $HOSTNAME in
