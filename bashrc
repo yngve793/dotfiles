@@ -41,7 +41,7 @@
 #fi
 
 
-for file in /etc/profile ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} /usr/local.nfs/rc/bashrc ${HOME}/.cargo/env
+for file in /etc/profile /etc/bash.bashrc /usr/local.nfs/rc/bashrc ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} ${HOME}/.cargo/env  ${HOME}/bin/git-annex.linux/bash/git-completion.bash
 do
     if [[ -f "$file" ]]
     then
@@ -62,7 +62,7 @@ case $HOSTNAME in
 
     module load Eigen/3-Ubuntu
     module load PETSc/3.7.7-Ubuntu
-    module load preCICE/1.6.0-Release-MPI-PETSc-Python
+    module load preCICE
 
     module load CoDiPack/1.7
     module load Togl/1.7
@@ -90,7 +90,7 @@ case $HOSTNAME in
   (sgscl*)
 #    if [ -z ${SPACK_ROOT+x}]; then
       echo "Loading Spack environment"
-      SPACK_ROOT="${HOME}/software/sgscl/spack/"
+      export SPACK_ROOT=/scratch-nfs/jaustar/software/spack
       . ${SPACK_ROOT}/share/spack/setup-env.sh
 #    fi
     #SPACK_ROOT=/scratch-nfs/jaustar/software/spack/
@@ -148,18 +148,25 @@ case $HOSTNAME in
     #source /data/scratch/jaustar/software/fenics/dolfin-install/share/dolfin/dolfin.conf
   ;;
   (argon-*)
-    export SPACK_ROOT=/home/jaustar/software/spack
+    export SPACK_ROOT="/data/scratch/jaustar/software/spack"
     . $SPACK_ROOT/share/spack/setup-env.sh
 
-    module load gcc-9.2.0
+#    module load gcc-9.2.0
     case $HOSTNAME in
       (argon-epyc)
-        echo "Importing dolfin"
-        source /home/jaustar/software/epyc/fenics/dolfin/build/home/jaustar/software/epyc/fenics/dolfin-install/share/dolfin/dolfin.conf
+#        echo "Importing dolfin"
+#        source /home/jaustar/software/epyc/fenics/dolfin/build/home/jaustar/software/epyc/fenics/dolfin-install/share/dolfin/dolfin.conf
         ;;
       (*)
         ;;
     esac
+  ;;
+  (ipvs-epyc*)
+    #echo "Sourcing Spack FORK! (develop)"
+    #export SPACK_ROOT=/data/scratch/sgs/jaustar/spack-test
+    #export SPACK_ROOT=/data/scratch/sgs/jaustar/spack-fork
+    export SPACK_ROOT=/data/scratch/sgs/jaustar/spack
+    . $SPACK_ROOT/share/spack/setup-env.sh
   ;;
   (*)
     export CODIPACKDIR=/opt/CoDiPack
