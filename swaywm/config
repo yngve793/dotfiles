@@ -24,7 +24,12 @@ set $term alacritty
 #set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:Ubuntu Mono 11"' --term='termite'
 
 #bindsym $mod+r exec termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'" 
-set $menu termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'" 
+#set $menu alacritty --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --prent-query | tail -n1 | xargs -r swaymsg -t command exec'" 
+set $menu alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
+#bindsym $mod+d exec alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
+#set $menu exec alacritty --class tofi -d 80 10 -e sh -c '$HOME/.config/sway/scripts/tofi | sort -u -r | fzf | $HOME/.config/sway/scripts/tofi'
+#bindsym $mod+d exec alacritty --class launcher --command bash -c 'echo -n "cmd: "; read cmd; swaymsg -t command exec $cmd'
+#set #
 for_window [app_id="^launcher$"] floating enable, border none
 
 #set $menu wofi --show drun --term='termite' | xargs swaymsg exec --
