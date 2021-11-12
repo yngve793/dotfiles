@@ -312,7 +312,10 @@ exec --no-startup-id ~/.screenlayout/main_only.sh
 exec --no-startup-id xrandr --dpi 96
 
 # Nextcloud client
-exec --no-startup-id nextcloud 
+exec --no-startup-id nextcloud --background
+
+# Nextcloud client
+exec --no-startup-id bwsyncandshare --background
 
 exec --no-startup-id syncthing-gtk -m 
 

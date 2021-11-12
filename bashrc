@@ -60,9 +60,9 @@ fi
 case $HOSTNAME in
   (lapsgs24)
 
-    module load Eigen/3-Ubuntu
-    module load PETSc/3.7.7-Ubuntu
-    module load preCICE
+#    module load Eigen/3-Ubuntu
+#    module load PETSc/3.7.7-Ubuntu
+#    module load preCICE
 
     module load CoDiPack/1.7
     module load Togl/1.7
@@ -222,3 +222,4 @@ esac
 #if [[ -f ~/.bash_aliases ]]; then
 #  source ~/.bash_aliases
 #fi
+. "$HOME/.cargo/env"

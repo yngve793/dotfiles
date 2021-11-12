@@ -91,3 +91,11 @@ case $HOSTNAME in
   ;;
   (*) ;;
 esac
+
+
+export VAGRANT_HOME=/media/jaustar/external-ssd/virtualmachines/vagrant/.vagrant.d/
+
+JULIA_VERSION=1.6.3
+if [ -d ${HOME}/software/julia-${JULIA_VERSION} ]; then
+  export PATH="${HOME}/software/julia-${JULIA_VERSION}/bin":"${PATH}"
+fi

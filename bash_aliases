@@ -15,6 +15,7 @@ alias df="df -h"
 alias ml="module list"
 alias ma="module av"
 alias tree="tree -C"
+alias less='less -R'
 
 case $HOSTNAME in
   (lapsgs24)
