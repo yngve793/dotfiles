@@ -1,15 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 dotfiles=("gitignore_global" "gitconfig" "emacs" "bashrc" "vimrc" "tmux.conf" "bash_aliases" "bash_functions" "bash_exports" "bash_profile")
 dir="${HOME}/dotfiles"
 
 # Check if there is an update in my repository
-if git pull ; then
-	#Deployed my normal dotfiles
-	echo "Looking for updates in my repository"
-else
-	exit $?
-fi
+#if git pull ; then
+#	#Deployed my normal dotfiles
+#	echo "Looking for updates in my repository"
+#else
+#	#exit $?
+#  echo "Could not update dotfiles"
+#fi
 
 echo "Set dir to ${dir}"
 
