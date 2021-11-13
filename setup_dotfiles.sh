@@ -18,8 +18,6 @@ for dotfile in "${dotfiles[@]}";do
 
     if [[ -f "${dir}/${dotfile}" ]]; then
 		  echo "Creating symlink for ${dotfile}"
-  #  echo  "${HOME}/${dotfile}"
-  #  echo "${dir}/${dotfile}"
 		  ln -sf "${dir}/${dotfile}" "${HOME}/.${dotfile}"
 
 		  case ${dotfile} in
@@ -82,10 +80,8 @@ dotconfdirsSystemDependent=("i3")
 appendname=""
 
 case $HOSTNAME in
-  (CRD-L-05716) appendname="linuxSubsystem/";;
-  (lapsgs24) appendname="$HOSTNAME/";;
-  (archpc) appendname="$HOSTNAME/";;
-  (*) appendname="";;
+  lapsgs24 | archpc ) appendname="$HOSTNAME/";;
+  *) appendname="";;
 esac
 echo "Set appendname to ${appendname}"
 

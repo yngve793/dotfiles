@@ -1,2 +1,4 @@
-[ -n "$PS1" ] && [ -f ~/.bashrc ] && source ~/.bashrc
-. "$HOME/.cargo/env"
+# Get user aliases, settings, and functions
+if [[ -f ~/.bashrc ]]; then
+    source ~/.bashrc
+fi

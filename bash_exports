@@ -20,30 +20,46 @@ fi
 export PATH=${PATH}:~/bin/"${HOSTNAME}"
 
 case $HOSTNAME in
-  (CRD-L-05716) source /etc/bash.bashrc;;
-  (lapsgs24)
-#    source /etc/profile.d/lmod.sh
+  lapsgs24)
     export MODULEPATH=/usr/share/lmod/6.6/modulefiles/Core
     export MODULEPATH=${HOME}/modulefiles:${MODULEPATH}
+
+    # Go and singularity
+    export GOPATH=${HOME}/go
+    export PATH=$PATH:/usr/local/go/bin:${GOPATH}/bin
+    export PATH=/usr/local/singularity/bin/:${PATH}
+    . /usr/local/etc/bash_completion.d/singularity
     ;;
-  (neon)
+  neon)
     export MODULEPATH=${MODULEPATH}:/data/scratch/jaustar/modulefiles
-    #module purge
-    #module load preCICE/1.6.0-opt
-    #module load cmake/3.12.1
     ;;
+  sgscl*)
+    export MODULEPATH=/scratch-nfs/jaustar/modulefiles:${MODULEPATH}
+  ;;
   (*)
+    export CODIPACKDIR=/opt/CoDiPack
+    export DISTCC_HOSTS="deepthought/5,lzo,cpp"
+    case ${HOSTNAME} in
+      archpc)
+        #Spack
+        export SPACK_ROOT=${HOME}/software/spack
+        . $SPACK_ROOT/share/spack/setup-env.sh
+        export MODULEPATH=/opt/modulefiles:${MODULEPATH}
+        export PETSC_DIR=/opt/petsc-3.11.4-opt
+        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PETSC_DIR/lib/:/opt/Togl-1.7/lib
+
+      ;;
+      *)
+      ;;
+    esac
 	;;
 esac
 
 case $HOSTNAME in
-  (lapsgs24)
+  lapsgs24 | neon | helium | sgscl* | kepler | vgpu | argon* )
     export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
-  (neon | helium | sgscl* | kepler | vgpu | argon* )
-    export PS1="\[\033[0;32m\]\u\[\033[0;36m\]@\h:\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
-    ;;
-  (*)
+  *)
     export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
     ;;
 esac
@@ -53,23 +69,8 @@ esac
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
 if [[ ! -z "${DESKTOP_SESSION}" ]];then
-    #eval $(gnome-keyring-daemon --start)
-#    echo "Starting gnome keyring as we are running a desktop session"
-#    echo "Value of DESKTOP_SESSION ${DESKTOP_SESSION}"
-#    eval $(/usr/bin/gnome-keyring-daemon --start --components=gpg,pkcs11,secrets,ssh)
-#    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-#    dbus-update-activation-environment --systemd DISPLAY
     eval $(gnome-keyring-daemon --start)
     export SSH_AUTH_SOCK
-    #export SSH_AUTH_SOCK
-#  echo "Don't do anything about the ssh keys"
-#if [[ ! -z "${DESKTOP_SESSION}" ]];then
-#    echo "Starting gnome keyring as we are running a desktop session"
-#    export $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh,gpg)
-#else
-#if [ -n "$DESKTOP_SESSION" ];then
-#    eval $(gnome-keyring-daemon --start)
-#    export SSH_AUTH_SOCK
 else
 #Start ssh-agent
 	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -83,14 +84,6 @@ fi
 # JAVA
 # Make Java use anti-aliasing for nicer fonts
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
-
-# Enable X-forwarding on windows subsystem
-case $HOSTNAME in
-  (CRD-L-05716) export DISPLAY=127.0.0.1:0
-#    export TERM=rxvt-unicode-256color
-  ;;
-  (*) ;;
-esac
 
 
 export VAGRANT_HOME=/media/jaustar/external-ssd/virtualmachines/vagrant/.vagrant.d/
