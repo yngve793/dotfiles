@@ -93,3 +93,5 @@ case $HOSTNAME in
 esac
 deploy_config_files "${appendname}" ${platform_config_files[@]}
 
+# Install Pathogen
+curl -LSso .vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
