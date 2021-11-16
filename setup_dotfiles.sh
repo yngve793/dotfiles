@@ -94,4 +94,8 @@ esac
 deploy_config_files "${appendname}" ${platform_config_files[@]}
 
 # Install Pathogen
-curl -LSso .vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p vim/autoload
+curl -LSso ./vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+echo "Consider setting up YouCompleteMe"
+echo "  cd vim/bundle/YouCompleteMe/ && python3 install.py --all"
