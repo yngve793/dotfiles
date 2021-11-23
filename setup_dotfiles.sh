@@ -65,6 +65,10 @@ deploy_configs_dirs () {
   done
 }
 
+if [[ -d "${HOME}/.config" ]]; then
+  mkdir -p "${HOME}/.config"
+fi
+
 # Deployment of configurations residing in .config/
 general_config_files=("")
 deploy_config_files "${config_files}"
