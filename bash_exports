@@ -31,6 +31,8 @@ case $HOSTNAME in
     fi
     export PATH=/usr/local/singularity/bin/:${PATH}
     . /usr/local/etc/bash_completion.d/singularity
+    
+    export VAGRANT_HOME=/media/jaustar/external-ssd/virtualmachines/vagrant/.vagrant.d/
     ;;
   neon)
     export MODULEPATH=${MODULEPATH}:/data/scratch/jaustar/modulefiles
@@ -87,8 +89,6 @@ fi
 # Make Java use anti-aliasing for nicer fonts
 export _JAVA_OPTIONS="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"
 
-
-export VAGRANT_HOME=/media/jaustar/external-ssd/virtualmachines/vagrant/.vagrant.d/
 
 JULIA_VERSION=1.6.3
 if [ -d ${HOME}/software/julia-${JULIA_VERSION} ]; then

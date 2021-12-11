@@ -55,10 +55,10 @@ output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 600 'swaylock -f -c a9a9a9' \
+         timeout 600 'swaylock -f -c 5e81ac' \
          timeout 660 'swaymsg "output * dpms off"' \
               resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c a9a9a9'
+         before-sleep 'swaylock -f -c 5e81ac'
 #exec swayidle -w \
 #         timeout 600 'swaylock -f -c 000000' \
 #         timeout 660 'swaymsg "output * dpms off"' \
@@ -296,7 +296,8 @@ set $Locker 'swaylock -f -c 000000'
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
     bindsym l exec --no-startup-id $Locker, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    #bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
