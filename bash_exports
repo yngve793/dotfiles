@@ -40,6 +40,9 @@ case $HOSTNAME in
   sgscl*)
     export MODULEPATH=/scratch-nfs/jaustar/modulefiles:${MODULEPATH}
   ;;
+  ipvs-epyc2)
+    export MODULEPATH=${MODULEPATH}:/home/jaustar/modulefiles/$HOSTNAME
+  ;;
   (*)
     export CODIPACKDIR=/opt/CoDiPack
     export DISTCC_HOSTS="deepthought/5,lzo,cpp"
