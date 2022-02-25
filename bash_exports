@@ -10,9 +10,9 @@ export FILESIZE=1000
 
 #export PATH=${HOME}/.local/bin:${PATH}
 export PATH=${HOME}/bin:${PATH}
-if [[ -d ${HOME}/bin/git-annex.linux ]]; then
-  export PATH="${HOME}/bin/git-annex.linux":${PATH}
-fi
+#if [[ -d ${HOME}/bin/git-annex.linux ]]; then
+#  export PATH="${HOME}/bin/git-annex.linux":${PATH}
+#fi
 # zstd
 if [[ -d ${HOME}/bin/zstd/programs ]]; then
   export PATH="${HOME}/bin/zstd/programs":${PATH}
