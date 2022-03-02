@@ -23,8 +23,8 @@ set $term alacritty
 #set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:Ubuntu Mono 11"' --term='xfce4-terminal'
 #set $menu j4-dmenu-desktop --dmenu='bemenu -i --nb "#3f3f3f" --nf "#dcdccc" --fn "pango:Ubuntu Mono 11"' --term='termite'
 
-#bindsym $mod+r exec termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'" 
-#set $menu alacritty --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --prent-query | tail -n1 | xargs -r swaymsg -t command exec'" 
+#bindsym $mod+r exec termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
+#set $menu alacritty --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --prent-query | tail -n1 | xargs -r swaymsg -t command exec'"
 set $menu alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
 #bindsym $mod+d exec alacritty --class 'launcher' --command bash -c 'compgen -c | sort -u | fzf | xargs -r swaymsg -t command exec'
 #set $menu exec alacritty --class tofi -d 80 10 -e sh -c '$HOME/.config/sway/scripts/tofi | sort -u -r | fzf | $HOME/.config/sway/scripts/tofi'
@@ -34,7 +34,7 @@ for_window [app_id="^launcher$"] floating enable, border none
 
 #set $menu wofi --show drun --term='termite' | xargs swaymsg exec --
 
-#bindsym $mod+r exec termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'" 
+#bindsym $mod+r exec termite --name=launcher -e "bash -c 'compgen -c | sort -u | fzf --no-extended --print-query | tail -n1 | xargs -r swaymsg -t command exec'"
 #for_window [app_id="^launcher$"] floating enable, border none
 
 font pango: Ubuntu Mono 10
@@ -199,7 +199,7 @@ input "MANUFACTURER1 Keyboard" xkb_model "pc105"
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
     #bindsym $mod+minus scratchpad show
-    
+
     # scratchpad
     bindsym $mod+m move scratchpad
     bindsym $mod+o scratchpad show
@@ -251,7 +251,7 @@ bar {
 include /etc/sway/config.d/*
 
 #bar {
-#  position bottom 
+#  position bottom
 #  font "Ubuntu Mono 11"
 #	status_command i3status -c ~/.config/i3/i3status.conf
 #}
@@ -301,7 +301,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -309,7 +309,7 @@ mode "$mode_system" {
 }
 
 #bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+Shift+p mode "$mode_system"	
+bindsym $mod+Shift+p mode "$mode_system"
 
 # scrot & gimp - root
 #bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
