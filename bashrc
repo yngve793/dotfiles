@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 
-for file in /etc/profile /etc/bash.bashrc /usr/local.nfs/rc/bashrc ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} ${HOME}/.cargo/env  ${HOME}/bin/git-annex.linux/bash/git-completion.bash "$HOME/.cargo/env"
+for file in /etc/profile.d/modules.sh /etc/profile /etc/bash.bashrc /usr/local.nfs/rc/bashrc ~/.git-{completion.bash,prompt.sh} ~/.svn-prompt.sh ~/.bash_{exports,aliases,functions,prompt} ~/.fzf.bash /usr/share/fzf/*.bash /usr/share/git/completion/git-{completion.bash,prompt.sh} ${HOME}/.cargo/env  ${HOME}/bin/git-annex.linux/bash/git-completion.bash "$HOME/.cargo/env"
 do
     if [[ -f "$file" ]]
     then
@@ -39,10 +39,6 @@ case $HOSTNAME in
     ;;
   (*)
     case ${HOSTNAME} in
-      archpc)
-        source /etc/profile.d/modules.sh
-        module load netgen/5.0.0-opt
-      ;;
       *)
       ;;
     esac

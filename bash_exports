@@ -31,7 +31,7 @@ case $HOSTNAME in
     fi
     export PATH=/usr/local/singularity/bin/:${PATH}
     . /usr/local/etc/bash_completion.d/singularity
-    
+
     export VAGRANT_HOME=/media/jaustar/external-ssd/virtualmachines/vagrant/.vagrant.d/
     ;;
   neon)
@@ -75,18 +75,25 @@ esac
 # Use gnome-keyring on a desktop session or else run ssh-agent
 #This also takes care that only one ssh-agent is running. I don't know if this conflicts with gnome.
 #https://wiki.archlinux.org/index.php/SSH_keys#ssh-agent
-if [[ ! -z "${DESKTOP_SESSION}" ]];then
-    eval $(gnome-keyring-daemon --start)
-    export SSH_AUTH_SOCK
-else
-#Start ssh-agent
-	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-		  ssh-agent > ~/.ssh-agent-thing
-	fi
-	if [[ "$SSH_AGENT_PID" == "" ]]; then
-		  eval "$(<~/.ssh-agent-thing)"
-	fi
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+    source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+
+#if [[ ! -z "${DESKTOP_SESSION}" ]];then
+#    eval $(gnome-keyring-daemon --start)
+#    export SSH_AUTH_SOCK
+#else
+##Start ssh-agent
+#	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+#		  ssh-agent > ~/.ssh-agent-thing
+#	fi
+#	if [[ "$SSH_AGENT_PID" == "" ]]; then
+#		  eval "$(<~/.ssh-agent-thing)"
+#	fi
+#fi
 
 # JAVA
 # Make Java use anti-aliasing for nicer fonts
