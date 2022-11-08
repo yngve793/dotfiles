@@ -1,8 +1,9 @@
 [user]
 	editor = vim
 	name = Alexander Jaust
-	email = alexander.jaust@ipvs.uni-stuttgart.de
-	signingkey = AF236B07E5725438F8AEED6F7A50241E429BBBAF
+	email = foss@jaust.net
+	#email = alexander.jaust@ipvs.uni-stuttgart.de
+	#signingkey = AF236B07E5725438F8AEED6F7A50241E429BBBAF
 [core]
 	excludesfile = ~/.gitignore_global
 [diff]
@@ -16,6 +17,6 @@
 [init]
 	defaultBranch = main
 [commit]
-	gpgsign = true
+	gpgsign = false
 [format]
 	pretty = format:%C(auto,yellow)%h %C(auto,blue)%>(12,trunc)%ad %C(auto,green)%<(20,trunc)%aN%C(auto,reset)%s%C(auto,red)% gD% D
