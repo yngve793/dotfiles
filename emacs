@@ -20,7 +20,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
- 
+
 ;;Font size
 (set-face-attribute 'default (selected-frame) :height 100)
 
@@ -32,7 +32,7 @@
 
 (add-to-list 'load-path
               "~/.emacs.d/elpa/yasnippet-0.8.0")
- 
+
 (require 'yasnippet)
 (setq yas-snippet-dirs
     '("~/.emacs.d/snippets"                 ;; personal snippets
@@ -50,7 +50,7 @@
 (add-to-list 'load-path "~/.emacs.d/matlab-emacs")
 (require 'matlab-load)
 ;;(autoload 'matlab-mode "matlab" "Matlab Editing Mode" t)
-;; (add-to-list 
+;; (add-to-list
 ;;	'auto-mode-alist
 ;;  '("\\.m$" . matlab-mode))
 ;;(setq matlab-indent-function t)

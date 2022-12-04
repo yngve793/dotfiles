@@ -28,7 +28,7 @@ set t_Co=256
 :set cursorline
 ":hi CursorLine cterm=NONE ctermbg=cyan ctermfg=black guibg=cyan guifg=black
 
-" show a status line with 
+" show a status line with
 "   t: file name
 "   y: file type
 "   ff: format (DOS/Unix/...)
