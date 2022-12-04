@@ -21,8 +21,8 @@ current_time=$(date "+%H:%M")
 #battery_status=$(upower --show-info $(upower --enumerate | grep 'BAT') | egrep "state" | awk '{print $2}')
 
 # Audio and multimedia
-audio_volume=$(pamixer --sink `pactl list sinks short | grep RUNNING | awk '{print $1}'` --get-volume)
-audio_is_muted=$(pamixer --sink `pactl list sinks short | grep RUNNING | awk '{print $1}'` --get-mute)
+audio_volume=$(pamixer --sink $(pactl list sinks short | grep RUNNING | awk '{print $1}') --get-volume)
+audio_is_muted=$(pamixer --sink $(pactl list sinks short | grep RUNNING | awk '{print $1}') --get-mute)
 media_artist=$(playerctl metadata artist)
 media_song=$(playerctl metadata title)
 player_status=$(playerctl status)
@@ -33,7 +33,7 @@ network=eno1
 # interface_easyname grabs the "old" interface name before systemd renamed it
 #interface_easyname=$(dmesg | grep $network | grep renamed | awk 'NF>1{print $NF}')
 interface_easyname=${network}
-ip_address=`ip -o -4 addr list ${network} | awk '{print $4}' | cut -d'/' -f1`
+ip_address=$(ip -o -4 addr list ${network} | awk '{print $4}' | cut -d'/' -f1)
 #ping=$(ping -c 1 www.google.es | tail -1| awk '{print $4}' | cut -d '/' -f 2 | cut -d '.' -f 1)
 
 # Others
@@ -47,14 +47,12 @@ loadavg_5min=$(cat /proc/loadavg | awk -F ' ' '{print $2}')
 # refresh on the bar
 #weather=$(curl -Ss 'https://wttr.in/Pontevedra?0&T&Q&format=1')
 
-
-if ! [ $network ]
-then
-   network_active="offline"
+if ! [ $network ]; then
+	network_active="offline"
 else
-#   network_active="⇆"
-#   network_speed=`ethtool eno1 | grep -i speed | cut -d':' -f2 | cut -d' ' -f2`
-   network_speed=$(cat /sys/class/net/eno1/speed)
+	#   network_active="⇆"
+	#   network_speed=`ethtool eno1 | grep -i speed | cut -d':' -f2 | cut -d' ' -f2`
+	network_speed=$(cat /sys/class/net/eno1/speed)
 fi
 
 #if [ $player_status = "Playing" ]
@@ -67,11 +65,10 @@ fi
 #    song_status='⏹'
 #fi
 
-if [ $audio_is_muted = "true" ]
-then
-    audio_active='muted'
+if [ $audio_is_muted = "true" ]; then
+	audio_active='muted'
 else
-    audio_active='Vol'
+	audio_active='Vol'
 fi
 
 disk_space_root=$(df -h --output=avail / | tail -n1 | tr -d ' ')
