@@ -37,8 +37,8 @@ deploy_config_files() {
 	echo "$@"
 	configfiles=("$@")
 
-	echo "List of config files to deploy ${configfiles[@]}"
-	echo "${configfiles}"
+	echo "List of config files to deploy ${configfiles[*]}"
+	#echo "${configfiles}"
 	for configfile in "${configfiles[@]}"; do
 		echo "Creating symlink for .config/${configfile}"
 		if [[ -f "${dir}/${d}${configfile}" ]]; then
@@ -53,7 +53,7 @@ deploy_configs_dirs() {
 	appendname=$1
 	shift
 	dotconfdirs=("$@")
-	echo "List of config dirs to deploy ${dotconfdirs[@]}"
+	echo "List of config dirs to deploy ${dotconfdirs[*]}"
 	for dotconfdir in "${dotconfdirs[@]}"; do
 		if [[ -d "${dir}/${appendname}${dotconfdir}" ]]; then
 			echo "Creating symlink for .config/${dotconfdir}"
@@ -71,7 +71,7 @@ fi
 
 # Deployment of configurations residing in .config/
 general_config_files=("")
-deploy_config_files "${config_files}"
+deploy_config_files "${general_config_files[*]}"
 
 # System-independent
 dotconfdirsSystemIndependent=("dunst" "sway" "alacritty")
@@ -95,7 +95,7 @@ platform_config_files=()
 case $HOSTNAME in
 lapsgs24) platform_config_files=("rdiff-exclude" "rdiff-include") ;;
 esac
-deploy_config_files "${appendname}" ${platform_config_files[@]}
+deploy_config_files "${appendname}" "${platform_config_files[*]}"
 
 # Install Pathogen
 mkdir -p vim/autoload
