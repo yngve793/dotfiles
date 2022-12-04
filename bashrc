@@ -14,6 +14,14 @@ do
     fi
 done
 
+for dir in "${HOME}/.local/bin" "${HOME}/bin"
+do
+    if [[ -d "$dir" ]]
+    then
+      export PATH="${dir}:${PATH}"
+    fi
+done
+
 # enable bash completion in interactive shells
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion

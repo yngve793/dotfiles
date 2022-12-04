@@ -7,17 +7,10 @@ export OMP_NUM_THREADS=1
 export EDITOR=vim
 export FILESIZE=1000
 
-
-#export PATH=${HOME}/.local/bin:${PATH}
-export PATH=${HOME}/bin:${PATH}
-#if [[ -d ${HOME}/bin/git-annex.linux ]]; then
-#  export PATH="${HOME}/bin/git-annex.linux":${PATH}
-#fi
 # zstd
 if [[ -d ${HOME}/bin/zstd/programs ]]; then
   export PATH="${HOME}/bin/zstd/programs":${PATH}
 fi
-export PATH=${PATH}:~/bin/"${HOSTNAME}"
 
 case $HOSTNAME in
   lapsgs24)
