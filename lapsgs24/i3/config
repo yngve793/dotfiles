@@ -217,12 +217,12 @@ set $black 	           #272822
 set $white             #FFFFFF
 set $fgcolor  #F8F8F2
 set $red #F92672
-set $orange 	#FD971F 
-set $lightorange 	#E69F66 
-set $yellow 	#E6DB74 
-set $green 	#A6E22E 
-set $blue 	#66D9EF 
-set $purple 	#AE81FF 
+set $orange 	#FD971F
+set $lightorange 	#E69F66
+set $yellow 	#E6DB74
+set $green 	#A6E22E
+set $blue 	#66D9EF
+set $purple 	#AE81FF
 set $gray1 	#404135
 
 bar {
@@ -247,7 +247,7 @@ bar {
     statusline $fgcolor
     separator $gray1
     # Type             border  background font
-    focused_workspace  $fgcolor $gray1 $red           
+    focused_workspace  $fgcolor $gray1 $red
     active_workspace   $gray1 $black $orange
     inactive_workspace $gray1 $black $green
     urgent_workspace   $purple $gray1 $red
@@ -275,7 +275,7 @@ mode "$mode_system" {
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -283,7 +283,7 @@ mode "$mode_system" {
 }
 
 #bindsym $mod+Pause mode "$mode_system"
-bindsym $mod+Shift+p mode "$mode_system"	
+bindsym $mod+Shift+p mode "$mode_system"
 
 # scrot & gimp - root
 bindsym --release Print exec scrot -e 'mv $f /tmp/ && gimp /tmp/$f'
@@ -304,7 +304,7 @@ exec --no-startup-id nm-applet
 #Compositing
 exec --no-startup-id compton
 ## OSD
-exec --no-startup-id dunst 
+exec --no-startup-id dunst
 #
 exec --no-startup-id ~/.screenlayout/main_only.sh
 #
@@ -317,7 +317,7 @@ exec --no-startup-id nextcloud --background
 # Nextcloud client
 exec --no-startup-id bwsyncandshare --background
 
-exec --no-startup-id syncthing-gtk -m 
+exec --no-startup-id syncthing-gtk -m
 
 exec --no-startup-id flameshot
 

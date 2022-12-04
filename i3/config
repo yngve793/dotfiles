@@ -251,4 +251,3 @@ exec --no-startup-id compton
 exec --no-startup-id dunst
 #
 exec xrandr --dpi 96
-
