@@ -74,7 +74,7 @@ general_config_files=("")
 deploy_config_files "${general_config_files[*]}"
 
 # System-independent
-dotconfdirsSystemIndependent=("dunst" "sway" "alacritty")
+dotconfdirsSystemIndependent=("dunst" "sway" "alacritty" "nvim")
 # Deploy
 deploy_configs_dirs "" "${dotconfdirsSystemIndependent[@]}"
 
