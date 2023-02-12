@@ -5,4 +5,7 @@ return function(use)
 			require("which-key").setup({})
 		end
 	})
+	use {"sitiom/nvim-numbertoggle"}
+--	use {"SirVer/ultisnips"}
+--	use {"honza/vim-snippets"}
 end
