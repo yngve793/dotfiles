@@ -10,3 +10,15 @@ vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+
+-- Highlight current line
+vim.opt.cursorline = true
+-- Highlight all occurences of current search pattern
+vim.opt.hlsearch = true
+
+
+-- Strip trailing whitespace on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})

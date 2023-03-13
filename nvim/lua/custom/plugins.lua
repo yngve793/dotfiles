@@ -6,6 +6,7 @@ return function(use)
 		end
 	})
 	use {"sitiom/nvim-numbertoggle"}
+	use {"ntpeters/vim-better-whitespace"}
 --	use {"SirVer/ultisnips"}
 --	use {"honza/vim-snippets"}
 end
