@@ -22,3 +22,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   pattern = { "*" },
   command = [[%s/\s\+$//e]],
 })
+
+-- Command to clear previous search
+-- :let @/ = ""
+vim.api.nvim_create_user_command('ClearSearch', 'let @/ = ""', {nargs=0})
