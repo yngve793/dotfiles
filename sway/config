@@ -338,3 +338,11 @@ exec --no-startup-id mako
 exec --no-startup-id syncthing-gtk -m
 # Nextcloud
 exec --no-startup-id nextcloud
+# Workspace 1
+exec swaymsg "layout stacking"
+exec firefox && sway '[app_id="firefox"]' move container to workspace 1
+exec keepassxc && sway '[app_id="keepassxc"]' move container to workspace 1
+# Workspace 2
+# Thunderbird
+exec swaymsg 'assign [class="thunderbird"] workspace 2'
+exec thunderbird && sway '[class="thunderbird"]' move container to workspace 2
