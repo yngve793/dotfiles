@@ -7,6 +7,12 @@ return function(use)
 	})
 	use {"sitiom/nvim-numbertoggle"}
 	use {"ntpeters/vim-better-whitespace"}
+	use({
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			require("nvim-tree").setup({})
+		end
+	})
 --	use {"SirVer/ultisnips"}
 --	use {"honza/vim-snippets"}
 end

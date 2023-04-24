@@ -15,7 +15,8 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.opt.cursorline = true
 -- Highlight all occurences of current search pattern
 vim.opt.hlsearch = true
-
+-- Enable mouse integration
+vim.o.mouse = "a"
 
 -- Strip trailing whitespace on save
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
@@ -26,3 +27,7 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 -- Command to clear previous search
 -- :let @/ = ""
 vim.api.nvim_create_user_command('ClearSearch', 'let @/ = ""', {nargs=0})
+
+-- Ntree shortcuts
+vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { desc = 'Toggle Ntree'} )
+vim.keymap.set('n', '<leader>e', ':NvimTreeFocus<CR>', { desc = 'Focus Ntree'} )

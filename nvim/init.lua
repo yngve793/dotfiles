@@ -1,5 +1,8 @@
 -- [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim)
 
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
