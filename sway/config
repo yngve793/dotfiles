@@ -333,7 +333,8 @@ exec --no-startup-id mako
 
 #
 #exec --no-startup-id ~/.screenlayout/main_only.sh
-
+# Background
+exec swaybg --mode center --image /home/alex/Documents/wallpapers/forest-lake-night.png --output *
 # syncthing
 exec --no-startup-id syncthing-gtk -m
 # Nextcloud
