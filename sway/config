@@ -347,3 +347,6 @@ exec keepassxc && sway '[app_id="keepassxc"]' move container to workspace 1
 # Thunderbird
 exec swaymsg 'assign [class="thunderbird"] workspace 2'
 exec thunderbird && sway '[class="thunderbird"]' move container to workspace 2
+
+# Help GTK+ applications to start faster
+exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
