@@ -8,6 +8,7 @@ return function(use)
 	use {"sitiom/nvim-numbertoggle"}
 	use {"ntpeters/vim-better-whitespace"}
 	use {"mbbill/undotree"}
+	use {"rebelot/kanagawa.nvim"}
 	-- use({"theprimeagen/harpoon"})
 	--use({
 	--	"nvim-tree/nvim-web-devicons",

@@ -85,6 +85,10 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
+
+-- Set up color scheme
+vim.cmd [[colorscheme kanagawa]]
+
 -- Ntree shortcuts
 --vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>', { desc = 'Toggle Ntree'} )
 --vim.keymap.set('n', '<leader>e', ':NvimTreeFocus<CR>', { desc = 'Focus Ntree'} )
