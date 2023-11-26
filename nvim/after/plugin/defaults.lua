@@ -3,13 +3,11 @@
 -- Show vertical line for 80 and 90 characters
 vim.opt.colorcolumn = "80,90"
 -- Use spaces for indent
-vim.o.autoindent = true
-vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.softtabstop = 4
-vim.o.shiftwidth = 4
-
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+--vim.o.autoindent = true
+--vim.o.expandtab = true
+--vim.o.tabstop = 4
+--vim.o.softtabstop = 4
+--vim.o.shiftwidth = 4
 
 -- Highlight current line
 vim.opt.cursorline = true
@@ -24,6 +22,12 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
   command = [[%s/\s\+$//e]],
 })
 
+-- Extra telescop commands
+--vim.keymap.set('n', '<C-p>', require('telescope.builtin').git_files, { desc = 'Search Git Files' })
+vim.keymap.set('n', '<leader>ps', function()
+  require('telescope.builtin').grep_string({ search = vim.fn.input("Grep > ") })
+end)
+
 -- Command to clear previous search
 -- :let @/ = ""
 vim.api.nvim_create_user_command('ClearSearch', 'let @/ = ""', {nargs=0})
@@ -34,33 +38,33 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
--- ThePrimeagen yank group stuff
-local augroup = vim.api.nvim_create_augroup
-local ThePrimeagenGroup = augroup('ThePrimeagen', {})
-
-local autocmd = vim.api.nvim_create_autocmd
-local yank_group = augroup('HighlightYank', {})
-
-function R(name)
-    require("plenary.reload").reload_module(name)
-end
-
-autocmd('TextYankPost', {
-    group = yank_group,
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({
-            higroup = 'IncSearch',
-            timeout = 40,
-        })
-    end,
-})
-
-autocmd({"BufWritePre"}, {
-    group = ThePrimeagenGroup,
-    pattern = "*",
-    command = "%s/\\s\\+$//e",
-})
+---- ThePrimeagen yank group stuff
+--local augroup = vim.api.nvim_create_augroup
+--local ThePrimeagenGroup = augroup('ThePrimeagen', {})
+--
+--local autocmd = vim.api.nvim_create_autocmd
+--local yank_group = augroup('HighlightYank', {})
+--
+--function R(name)
+--    require("plenary.reload").reload_module(name)
+--end
+--
+--autocmd('TextYankPost', {
+--    group = yank_group,
+--    pattern = '*',
+--    callback = function()
+--        vim.highlight.on_yank({
+--            higroup = 'IncSearch',
+--            timeout = 40,
+--        })
+--    end,
+--})
+--
+--autocmd({"BufWritePre"}, {
+--    group = ThePrimeagenGroup,
+--    pattern = "*",
+--    command = "%s/\\s\\+$//e",
+--})
 
 -- UndoTree
 vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -85,6 +89,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
+
 
 -- Set up color scheme
 vim.cmd [[colorscheme kanagawa]]

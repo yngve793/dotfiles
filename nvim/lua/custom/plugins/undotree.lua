@@ -1,0 +1,4 @@
+-- undotree
+return {
+  "mbbill/undotree",
+}
