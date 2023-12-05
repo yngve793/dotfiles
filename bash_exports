@@ -3,7 +3,6 @@
 # Keep 1000 lines in .bash_history (default is 500)
 export HISTSIZE=5000
 export HIST
-export OMP_NUM_THREADS=1
 export EDITOR=nvim
 export VISUAL=nvim
 export FILESIZE=1000
