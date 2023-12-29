@@ -42,7 +42,8 @@ font pango: Ubuntu Mono 10
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/alex/Documents/wallpapers/forest-lake-night.png fit
 #
 # Example configuration:
 #
@@ -333,8 +334,6 @@ exec --no-startup-id mako
 
 #
 #exec --no-startup-id ~/.screenlayout/main_only.sh
-# Background
-exec swaybg --mode center --image /home/alex/Documents/wallpapers/forest-lake-night.png --output *
 # syncthing
 exec --no-startup-id syncthing-gtk -m
 # Nextcloud
