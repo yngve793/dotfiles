@@ -6,6 +6,10 @@ whatis("Keywords: VDS, Library")
 whatis("URL: https://osdu.pages.opengroup.org/platform/domain-data-mgmt-services/seismic/open-vds/")
 whatis("Description: Library to interact with VDS datasets")
 
+local src = "/Users/YVI/software/openvds-3.4.1-src"
+local gmock = pathJoin(src,"3rdparty/gtest-1.12.1/googlemock/include/gmock")
+local gtest = pathJoin(src,"3rdparty/gtest-1.12.1/googletest/include/gtest")
+
 local base = "/Users/YVI/software/openvds-3.4.1-install"
 local bin = pathJoin(base,"bin")
 local include = pathJoin(base,"include")
@@ -14,6 +18,8 @@ local share = pathJoin(base,"share")
 
 prepend_path( "PATH", bin )
 prepend_path( "CPATH", include )
+prepend_path( "CPATH", gmock )
+prepend_path( "CPATH", gtest )
 prepend_path( "LD_LIBRARY_PATH", lib )
 prepend_path( "DYLD_LIBRARY_PATH", lib)
 prepend_path( "CMAKE_MODULE_PATH", pathJoin(base,"cmake") )

@@ -4,6 +4,9 @@ export PATH=$PATH:/usr/local/bin
 
 source ~/.git-prompt.sh
 
+source ~/.bash_aliases
+
+
 function color_my_prompt {
     local __user_and_host="\[\033[01;32m\]\u@\h"
     local __cur_location="\[\033[01;34m\]\w"
@@ -26,7 +29,8 @@ parse_git_bg() {
 
 # export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(__git_ps1)\n└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
 # export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]$(parse_git_bg)$(__git_ps1)\n\[\033[0;32m\]└─(\[\033[1;32m\]\t, \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
-export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(parse_git_bg)\$(__git_ps1)\n\[\033[0;32m\]└─(\[\033[1;32m\]\t\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
+# export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(parse_git_bg)\$(__git_ps1)\n\[\033[0;32m\]└─(\[\033[1;32m\]\t\$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
+export PS1="\u\[\033[1;34m\]@\h\[\033[0m\]:\[\033[0;32m\]\w\[\033[0;32m\]\$(parse_git_bg)\$(__git_ps1)\n\[\033[0;32m\]└─(\[\033[1;32m\]\t,   \$(ls -1 | wc -l | sed 's: ::g') files, \$(ls -sh | head -n1 | sed 's/total //')b\[\033[1;37m\]\[\033[0;32m\])\342\224\200>\[\033[0m\] "
 
 
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion || {
@@ -39,3 +43,4 @@ source /opt/homebrew/opt/lmod/init/bash
 export MODULEPATH=/Users/YVI/software/modules:$MODULEPATH
 module load openvds
 module load brew_default
+module load vds-slice
